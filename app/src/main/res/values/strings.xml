@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PhanMemThiBangLai</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Phần mềm thi trắc nghiệm</string>
+    <string name="nav_header_subtitle">Subtitle</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Trang chủ</string>
+    <string name="menu_account">Tài khoản</string>
+
+
+    <string name="home_second">Home Second</string>
+    <string name="menu_huongdanSuDung">Hướng dẫn sử dụng</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
