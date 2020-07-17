@@ -25,11 +25,11 @@ import ngoclong.example.phanmemthibanglai.ui.tracuuluat.TraCuuLuatActivity;
 
 public class HomeFragment extends Fragment {
 
-    GridView gridView;
+    private GridView gridView;
 
-    String[] items = {"Thi sát hạch", "Học lý thuyết",
-            "Biển báo đường bộ", "Mẹo thi điểm cao",
-            "Tra cứu luật nhanh", "Các câu hay sai"};
+    String[] items = {"THI SÁT HẠCH", "HỌC LÝ THUYẾT",
+            " BIỂN BÁO \nĐƯỜNG BỘ", " MẸO THI \nKẾT QUẢ CAO",
+            "TRA CỨU LUẬT", "CÁC CÂU HAY SAI"};
 
     int[] icons = {R.drawable.shbl, R.drawable.bookne1,
             R.drawable.bienbao1, R.drawable.brain2,
@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle
             savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        gridView = view.findViewById(R.id00.gridViewMenu);
+        gridView = view.findViewById(R.id.gridViewMenu);
 
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter(customAdapter);

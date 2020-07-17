@@ -23,8 +23,8 @@ import ngoclong.example.phanmemthibanglai.ui.tracuuluat.TraCuuLuatActivity;
 
 public class ThiSatHachActivity extends AppCompatActivity {
 
-    GridView gridView;
-    String[] items = {"1"};
+    private GridView gridView;
+    String[] items = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,8 @@ public class ThiSatHachActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
             {
-
+                Intent intent = new Intent(ThiSatHachActivity.this, LamBaiThiActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -67,11 +68,10 @@ public class ThiSatHachActivity extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            View view1 = getLayoutInflater().inflate(R.layout.grid_item,null);
-            TextView name = view1.findViewById(R.id.txtView);
-            ImageView image = view1.findViewById(R.id.imgView);
+            View view1 = getLayoutInflater().inflate(R.layout.item_thi_sat_hach,null);
+            TextView name = view1.findViewById(R.id.txtTenBoDe);
 
-            name.setText(items[i]);
+            name.setText("Bộ đề " + items[i]);
 
             return view1;
         }

@@ -4,13 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.thisathach.ThiSatHachActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Học lý thuyết activity"
-        android:textSize="40dp">
-
-    </TextView>
+    tools:context=".ui.hoclythuyet.HocLyThuyetActivity">
+    <ListView
+        android:id="@+id/List_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:columnWidth="200dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:horizontalSpacing="4dp"
+        android:verticalSpacing="4dp"
+        android:layout_alignParentBottom="true"
+        />
 
 </LinearLayout>

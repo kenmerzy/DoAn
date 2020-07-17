@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -11,25 +13,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:id="@+id/imgItemHocLT"
-                />
+                android:id="@+id/imvHLT"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_account_circle_green_24dp" />
+            />
         </RelativeLayout>
 
-
-
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_marginLeft="20dp"
             >
             <TextView
                 android:id="@+id/txtHLTTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:text="20 CÂU HỎI ĐIỂM LIỆT"
-                android:textSize="18dp"
+                android:textSize="23dp"
                 >
 
             </TextView>
@@ -37,9 +39,9 @@
             <TextView
                 android:id="@+id/txtHLTDesription"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:text="Gồm 20 câu hỏi"
-                android:textSize="14dp"
+                android:textSize="16dp"
                 >
 
             </TextView>
@@ -47,12 +49,14 @@
             <TextView
                 android:id="@+id/txtHLTSoCauHoi"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:text="1/20"
                 android:textSize="14dp"
+                android:verticalSpacing="4dp"
                 >
-
             </TextView>
         </LinearLayout>
     </LinearLayout>
+
+
 </RelativeLayout>

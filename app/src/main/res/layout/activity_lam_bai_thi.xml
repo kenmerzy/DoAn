@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.thisathach.LamBaiThiActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvCauHoi"
+            android:layout_margin="10dp"
+            android:text="Câu hỏi "
+            android:textSize="30dp"/>
+       <RadioGroup
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/grpDapAn"
+           android:layout_below="@id/tvCauHoi">
+           <RadioButton
+               android:id="@+id/rdBtnDapAn1"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Male" />
+
+           <RadioButton
+               android:id="@+id/rdBtnDapAn2"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Famale" />
+           <RadioButton
+               android:id="@+id/rdBtnDapAn3"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Male" />
+
+           <RadioButton
+               android:id="@+id/rdBtnDapAn4"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Famale" />
+       </RadioGroup>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giải thích đáp án"
+            android:layout_below = "@id/grpDapAn"
+            android:textSize="20dp"
+            android:paddingLeft="10dp"
+            android:id="@+id/tvGT" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ASFKASDLASDAJFAKDS"
+            android:layout_below="@id/tvGT"
+            android:textSize="17dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/tvGiaiThichDapAn" />
+    </RelativeLayout>
+</RelativeLayout>
