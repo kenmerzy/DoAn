@@ -14,10 +14,5 @@
             android:icon="@drawable/ic_help_outline_green_24dp"
             android:title="@string/menu_huongdanSuDung" />
 
-        <item
-            android:id="@+id/nav_account"
-            android:icon="@drawable/ic_account_circle_green_24dp"
-            android:title="@string/menu_account" />
-
     </group>
 </menu>
