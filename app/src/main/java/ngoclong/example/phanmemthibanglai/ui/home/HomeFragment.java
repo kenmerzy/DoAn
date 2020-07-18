@@ -1,8 +1,10 @@
 package ngoclong.example.phanmemthibanglai.ui.home;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 
 import ngoclong.example.phanmemthibanglai.R;
 import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBaoActivity;
@@ -123,7 +122,6 @@ public class HomeFragment extends Fragment {
             View view1 = getLayoutInflater().inflate(R.layout.grid_item,null);
             TextView name = view1.findViewById(R.id.txtView);
             ImageView image = view1.findViewById(R.id.imgView);
-
             name.setText(items[i]);
             image.setImageResource(icons[i]);
             return view1;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <group>
+        <item
+            android:id="@+id/wqweqweq"
+            android:title="19/20"
+            app:showAsAction="always"
+            >
+        </item>
+        <item
+            android:id="@+id/mnuKetThuc"
+            android:title="KẾT THÚC"
+            app:showAsAction="always"/>
+    </group>
+
+</menu>

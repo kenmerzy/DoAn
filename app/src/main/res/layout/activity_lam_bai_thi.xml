@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.thisathach.LamBaiThiActivity">
 
     <RelativeLayout
@@ -60,5 +61,7 @@
             android:textSize="17dp"
             android:paddingLeft="5dp"
             android:id="@+id/tvGiaiThichDapAn" />
+
     </RelativeLayout>
+
 </RelativeLayout>
