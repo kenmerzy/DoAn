@@ -7,7 +7,7 @@
 
             android:id="@+id/countdown"
             android:title="Time"
-            app:actionViewClass="ngoclong.example.phanmemthibanglai.ui.thisathach.ReverseChronometer"
+            app:actionViewClass="android.widget.TextView"
             app:showAsAction="always">
         </item>
         <item
