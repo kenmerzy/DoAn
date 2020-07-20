@@ -63,7 +63,6 @@ public class ThiSatHachActivity extends AppCompatActivity {
             TextView name = view1.findViewById(R.id.txtTenBoDe);
 
             name.setText("Bộ đề " + items[i]);
-
             return view1;
         }
     }

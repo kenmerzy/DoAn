@@ -118,7 +118,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(this, "Ngan", Toast.LENGTH_SHORT).show ();
+                   //Toast.makeText(this, "Ngan", Toast.LENGTH_SHORT).show ();
                 }
                 break;
         }
