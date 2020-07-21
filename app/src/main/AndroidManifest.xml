@@ -8,8 +8,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.thisathach.LamBaiThiActivity"
-            />
+        <activity android:name=".ui.thisathach.LamBaiThiActivity" />
         <activity android:name=".ui.tracuuluat.TraCuuLuatActivity" />
         <activity android:name=".ui.bienbao.BienBaoActivity" />
         <activity android:name=".ui.caccauhaysai.CacCauHaySaiActivity" />
