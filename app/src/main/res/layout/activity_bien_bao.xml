@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.thisathach.ThiSatHachActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Biển báo activity"
-        android:textSize="40dp">
+    tools:context=".ui.bienbao.BienBaoActivity">
 
-    </TextView>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001"
+        tools:layout_editor_absoluteX="0dp" >
 
-</LinearLayout>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            app:tabBackground="@color/design_default_color_primary"
+            app:tabIndicatorColor="@color/design_default_color_primary"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/cardview_shadow_end_color" />
+    </android.support.v4.view.ViewPager>
+</android.support.constraint.ConstraintLayout>

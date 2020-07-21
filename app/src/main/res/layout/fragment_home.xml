@@ -16,6 +16,7 @@
             android:layout_above="@id/gridViewMenu"
             />
         <GridView
+
             android:id="@+id/gridViewMenu"
             android:layout_width="match_parent"
             android:layout_height="400dp"
@@ -23,10 +24,9 @@
             android:columnWidth="200dp"
             android:stretchMode="columnWidth"
             android:gravity="center"
-            android:horizontalSpacing="4dp"
-            android:verticalSpacing="4dp"
+            android:horizontalSpacing="2dp"
+            android:verticalSpacing="2dp"
             android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
-
 </RelativeLayout>

@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/grpDapAn"
             android:paddingLeft="20dp"
-
             android:layout_below="@id/tvCauHoi">
             <RadioButton
                 android:id="@+id/rdBtnDapAn1"
