@@ -9,6 +9,7 @@ import ngoclong.example.phanmemthibanglai.R;
 
 public class BienBaoActivity extends AppCompatActivity {
     private ViewPager viewPager;
+    private  TabLayout tabLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +22,9 @@ public class BienBaoActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        viewPager = (ViewPager) findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.vPager);
+        tabLayout =findViewById(R.id.tabLayout);
         viewPager.setAdapter(new BienBaoAdapter(getSupportFragmentManager()));
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.vPager);
         tabLayout.setupWithViewPager(viewPager);
     }
     @Override
