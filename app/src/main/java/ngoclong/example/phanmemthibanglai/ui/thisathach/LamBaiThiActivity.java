@@ -92,7 +92,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
         MenuItem btnKT = menu.findItem(R.id.mnuKetThuc);
          timerText = (TextView) MenuItemCompat.getActionView(timerItem);
 
-        timerText.setPadding(10, 0, 10, 0); //Or something like that...
+        timerText.setPadding(10, 0, 20, 0); //Or something like that...
 
         timerText.setTypeface(null, Typeface.BOLD);
 
@@ -121,7 +121,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
                 int secondsLeft = (int) ((millisecondsLeft % 60000)/1000);
                 int minuteLeft = (int) ((millisecondsLeft/60000));
                 if (minuteLeft < 2)
-                    timerText.setTextColor(Color.parseColor("#D14848"));
+                    timerText.setTextColor(Color.parseColor("#FF0000"));
                 String scl = String.valueOf(secondsLeft);
                 String mnl = String.valueOf(minuteLeft);
                 if (secondsLeft < 10)

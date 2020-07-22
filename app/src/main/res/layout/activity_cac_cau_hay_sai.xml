@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Các câu hay activity"
+        android:text="Các câu hay sai "
         android:textSize="40dp">
 
     </TextView>

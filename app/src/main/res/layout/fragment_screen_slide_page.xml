@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_textview"
-            android:text="Hành vi vượt đèn đỏ khi đèn..."
+            android:text="Hành vi vượt đèn đỏ sẽ bị phạt 100.000..."
             android:textColor="#000000"
             android:layout_below="@id/tvGT"
             android:textSize="17dp"
@@ -70,7 +70,6 @@
             android:visibility="visible"
             android:padding="5dp"
             android:id="@+id/tvGiaiThichDapAn" />
-
 
     </RelativeLayout>
 </ScrollView>

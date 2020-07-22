@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tabIndicatorColor="@color/cardview_dark_background"
         app:tabMode="scrollable"
+        app:tabGravity="fill"
         app:tabSelectedTextColor="@color/design_default_color_primary_dark"
         tools:ignore="ExtraText">
 

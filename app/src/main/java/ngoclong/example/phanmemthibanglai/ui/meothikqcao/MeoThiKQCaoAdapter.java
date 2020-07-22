@@ -1,25 +1,23 @@
-package ngoclong.example.phanmemthibanglai.ui.tracuuluat;
+package ngoclong.example.phanmemthibanglai.ui.meothikqcao;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+public class MeoThiKQCaoAdapter extends FragmentStatePagerAdapter {
 
-public class TraCuuLuatAdapter extends FragmentStatePagerAdapter {
+    private String listTab[] = {"Mẹo lý thuyết","Mẹo thực hành"};
 
-    private String listTab[] = {"Xe máy","Ô tô","Khác"};
-
-    private XeMayFragment fragment_xemay;
-    private OtoFragment fragment_oto;
-    private KhacFragment fragment_khac;
+    private MeoLyThuyetFragment fragment_meolythuyet;
+    private MeoThucHanhFragment fragment_meothuchanh;
 
 
-    public TraCuuLuatAdapter(FragmentManager fm) {
+    public MeoThiKQCaoAdapter(FragmentManager fm) {
         super(fm);
-        fragment_xemay = new XeMayFragment();
-        fragment_oto = new OtoFragment();
-        fragment_khac = new KhacFragment();
+        fragment_meolythuyet = new MeoLyThuyetFragment();
+        fragment_meothuchanh = new MeoThucHanhFragment();
+
     }
 
     @Override
@@ -28,13 +26,10 @@ public class TraCuuLuatAdapter extends FragmentStatePagerAdapter {
         switch (i)
         {
             case 0:
-                fr = fragment_xemay;
+                fr = fragment_meolythuyet;
                 break;
             case 1:
-                fr = fragment_oto;
-                break;
-            case 2:
-                fr = fragment_khac;
+                fr = fragment_meothuchanh;
                 break;
             default:
                 break;

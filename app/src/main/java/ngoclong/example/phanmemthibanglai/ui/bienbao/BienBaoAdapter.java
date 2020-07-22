@@ -12,6 +12,7 @@ public class BienBaoAdapter extends FragmentStatePagerAdapter {
     private BienBaoHieuLenhFragment fragment_bienhieulenh;
     private BienBaoChiDanFragment fragment_chidan;
     private BienBaoNguyHiemFragment fragment_nguyhiem;
+
     public BienBaoAdapter(FragmentManager fm) {
         super(fm);
         fragment_bienbaocam = new BienBaoCamFragment();
