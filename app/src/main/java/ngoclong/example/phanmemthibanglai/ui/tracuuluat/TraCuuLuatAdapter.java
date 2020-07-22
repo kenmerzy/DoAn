@@ -1,18 +1,26 @@
-package ngoclong.example.phanmemthibanglai.ui.bienbao;
+package ngoclong.example.phanmemthibanglai.ui.tracuuluat;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class BienBaoAdapter extends FragmentStatePagerAdapter {
+import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBaoCamFragment;
+import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBaoChiDanFragment;
+import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBaoHieuLenhFragment;
+import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBaoNguyHiemFragment;
 
-    private String listTab[] = {"Biển báo cấm","Biển báo hiệu lệnh","Biển báo chỉ dẫn","Biển báo nguy hiểm"};
+
+public class TraCuuLuatAdapter extends FragmentStatePagerAdapter {
+
+    private String listTab[] = {"Xe máy","Ô tô","Khác"};
+
     private BienBaoCamFragment fragment_bienbaocam;
     private BienBaoHieuLenhFragment fragment_bienhieulenh;
     private BienBaoChiDanFragment fragment_chidan;
     private BienBaoNguyHiemFragment fragment_nguyhiem;
-    public BienBaoAdapter(FragmentManager fm) {
+
+    public TraCuuLuatAdapter(FragmentManager fm) {
         super(fm);
         fragment_bienbaocam = new BienBaoCamFragment();
         fragment_bienhieulenh = new BienBaoHieuLenhFragment();
@@ -33,9 +41,6 @@ public class BienBaoAdapter extends FragmentStatePagerAdapter {
                 break;
             case 2:
                 fr = fragment_chidan;
-                break;
-            case 3:
-                fr = fragment_nguyhiem;
                 break;
             default:
                 break;

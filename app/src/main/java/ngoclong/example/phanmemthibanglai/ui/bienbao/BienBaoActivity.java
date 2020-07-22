@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 
 import ngoclong.example.phanmemthibanglai.R;
 
@@ -27,6 +28,14 @@ public class BienBaoActivity extends AppCompatActivity {
         viewPager.setAdapter(new BienBaoAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_tra_cuu_luat, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
     @Override
     public boolean onSupportNavigateUp()
     {
