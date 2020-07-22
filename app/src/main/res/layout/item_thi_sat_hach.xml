@@ -17,6 +17,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:text="LÀM BÀI"
+            android:textColor="#000"
             android:textSize="19dp" />
         <TextView
             android:id="@+id/txtSoCauDung"
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/txtTrangThai"
-
+            android:textColor="#000"
             android:text="25 câu/ 19 phút"
             android:textSize="12dp" />
         <TextView
@@ -36,9 +37,10 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="Đề số 1"
+            android:textColor="#000"
             android:layout_marginBottom="10dp"
             android:textStyle="bold"
-            android:textSize="14dp" />
+            android:textSize="13dp" />
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="match_parent"
@@ -49,7 +51,7 @@
             android:background="@drawable/circle_shape"
             style="?android:attr/progressBarStyleHorizontal"
             android:max="100"
-            android:progress="85" />
+            android:progress="0" />
 
     </RelativeLayout>
 </RelativeLayout>

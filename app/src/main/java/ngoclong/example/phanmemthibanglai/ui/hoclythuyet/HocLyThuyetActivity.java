@@ -1,24 +1,23 @@
 package ngoclong.example.phanmemthibanglai.ui.hoclythuyet;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import ngoclong.example.phanmemthibanglai.R;
-import ngoclong.example.phanmemthibanglai.ui.thisathach.ThiSatHachActivity;
 
 public class HocLyThuyetActivity extends AppCompatActivity {
     ListView listView;
-    String[] items = {"1","2","3","4","5","6"};
-    int[] icons = {R.drawable.bienbao, R.drawable.bookicon,
+    String[] items = {"1","2","3","4","5","6","7","8","9"};
+    int[] icons = {R.drawable.drivingicon, R.drawable.bookicon,
             R.drawable.drivingicon, R.drawable.icon1,
+            R.drawable.iconaway, R.drawable.caricon,R.drawable.icon1,
             R.drawable.iconaway, R.drawable.caricon};
     @Override
     protected void onCreate(Bundle savedInstanceState) {

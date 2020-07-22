@@ -6,20 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/slideshow"
+            android:id="@+id/imvSlideshow"
+            android:layout_height="130dp"
+            android:src="@drawable/android15"
             android:layout_above="@id/gridViewMenu"
             />
         <GridView
 
             android:id="@+id/gridViewMenu"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/imvSlideshow"
             android:numColumns="3"
             android:columnWidth="200dp"
             android:stretchMode="columnWidth"
@@ -28,5 +31,5 @@
             android:verticalSpacing="2dp"
             android:layout_alignParentBottom="true"
             />
-    </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
