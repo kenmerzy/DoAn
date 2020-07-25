@@ -13,7 +13,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
-
+ private int h;
+ private String jk;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
