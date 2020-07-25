@@ -6,6 +6,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -13,9 +14,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
- private int h;
- private String jk;
     private AppBarConfiguration mAppBarConfiguration;
+    private ArrayAdapter<s>;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
