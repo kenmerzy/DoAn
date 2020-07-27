@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import ngoclong.example.phanmemthibanglai.R;
@@ -83,6 +85,8 @@ public class BienBaoHieuLenhFragment extends Fragment {
 
             tvTenBienBao.setText(arrBienBaoHieuLenh.get(i).getTenBB());
             tvMoTa.setText(arrBienBaoHieuLenh.get(i).getNoiDung());
+            String url = "file:///android_asset/images/"+ arrBienBaoHieuLenh.get(i).getHinh();
+            Picasso.with(getContext()).load(url).into(imvHinhBienBao);
             return view1;
         }
     }

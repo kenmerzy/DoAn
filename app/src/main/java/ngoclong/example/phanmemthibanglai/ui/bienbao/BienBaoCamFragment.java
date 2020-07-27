@@ -89,7 +89,7 @@ public class BienBaoCamFragment extends Fragment {
 
             tvTenBienBao.setText(arrBienBaoCam.get(i).getTenBB());
             tvMoTa.setText(arrBienBaoCam.get(i).getNoiDung());
-            String url = "file:///android_asset/images/"+arrBienBaoCam.get(i).getHinh()+".jpg";
+            String url = "file:///android_asset/images/"+arrBienBaoCam.get(i).getHinh();
             Picasso.with(getContext()).load(url).into(imvHinhBienBao);
             return view1;
         }
