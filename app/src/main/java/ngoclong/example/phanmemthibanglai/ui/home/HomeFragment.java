@@ -13,6 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
+
 
 import ngoclong.example.phanmemthibanglai.R;
 import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBaoActivity;
@@ -23,7 +25,7 @@ import ngoclong.example.phanmemthibanglai.ui.thisathach.ThiSatHachActivity;
 import ngoclong.example.phanmemthibanglai.ui.tracuuluat.TraCuuLuatActivity;
 
 public class HomeFragment extends Fragment {
-
+    private ViewFlipper viewFlipper;
     private GridView gridView;
 
     String[] items = {"THI SÁT HẠCH", "HỌC LÝ THUYẾT",
@@ -39,14 +41,17 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle
             savedInstanceState) {
+        viewFlipper = view.findViewById(R.id.Slideshow);
+        viewFlipper.setFlipInterval(3000);
+        viewFlipper.setAutoStart(true);
         super.onViewCreated(view, savedInstanceState);
         gridView = view.findViewById(R.id.gridViewMenu);
-
         CustomAdapter customAdapter = new CustomAdapter();
         gridView.setAdapter(customAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

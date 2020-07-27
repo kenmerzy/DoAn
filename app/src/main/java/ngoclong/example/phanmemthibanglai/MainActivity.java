@@ -6,7 +6,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
+import android.widget.ViewFlipper;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -14,15 +14,17 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+    ViewFlipper viewFlipper;
     private AppBarConfiguration mAppBarConfiguration;
-    private ArrayAdapter<s>;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        viewFlipper = (ViewFlipper)findViewById(R.id.Slideshow);
+//        viewFlipper.setFlipInterval(3000);
+//        viewFlipper.setAutoStart(true);
 //        FloatingActionButton fab = findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override

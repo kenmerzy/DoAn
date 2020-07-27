@@ -13,40 +13,44 @@
             android:id="@+id/tvCauHoi"
             android:layout_margin="10dp"
             android:text="Câu hỏi "
+            android:textStyle="bold"
             android:textColor="#000000"
-            android:textSize="26dp"/>
+            android:textSize="23dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imvCauHoi"
+            android:layout_below="@id/tvCauHoi"/>
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/grpDapAn"
             android:paddingLeft="20dp"
-            android:layout_below="@id/tvCauHoi">
+            android:paddingRight="20dp"
+            android:layout_below="@id/imvCauHoi">
             <RadioButton
                 android:id="@+id/rdBtnDapAn1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:layout_marginBottom="12dp"
+                android:textSize="19dp"
                 android:text="TP.HCM" />
 
             <RadioButton
                 android:id="@+id/rdBtnDapAn2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:text="Hà Nội" />
+                android:layout_marginBottom="12dp"
+                android:textSize="19dp"
+                android:text="Vĩnh Long" />
             <RadioButton
                 android:id="@+id/rdBtnDapAn3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:layout_marginBottom="12dp"
+                android:textSize="19dp"
                 android:text="Bến Tre" />
 
-            <RadioButton
-                android:id="@+id/rdBtnDapAn4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:text="Vĩnh Long" />
         </RadioGroup>
         <TextView
             android:layout_width="match_parent"
@@ -57,6 +61,7 @@
             android:layout_marginTop="20dp"
             android:textSize="21dp"
             android:paddingLeft="15dp"
+            android:visibility="invisible"
             android:id="@+id/tvGT" />
         <TextView
             android:layout_width="match_parent"
@@ -67,7 +72,7 @@
             android:layout_below="@id/tvGT"
             android:textSize="17dp"
             android:layout_margin="15dp"
-            android:visibility="visible"
+            android:visibility="invisible"
             android:padding="5dp"
             android:id="@+id/tvGiaiThichDapAn" />
 

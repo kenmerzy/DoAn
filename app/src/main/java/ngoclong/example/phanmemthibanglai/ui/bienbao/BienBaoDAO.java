@@ -1,0 +1,71 @@
+package ngoclong.example.phanmemthibanglai.ui.bienbao;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+
+import java.util.ArrayList;
+
+import ngoclong.example.phanmemthibanglai.ui.thisathach.DatabaseAccess;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.DatabaseHelper;
+
+public class BienBaoDAO {
+    Cursor csr = null;
+    DatabaseAccess databaseAccess;
+    public BienBaoDAO(Context context){
+        databaseAccess = DatabaseAccess.getInstance(context);
+    }
+
+    public ArrayList<BienBao> getAllBienBaoCam(){
+        databaseAccess.open();
+        ArrayList<BienBao> arr = new ArrayList<>();
+
+        String sql = "select * from BienBaoCam";
+        csr = databaseAccess.getDb().rawQuery(sql, null);
+        if (csr != null) {
+            if (csr.moveToFirst()) {
+                do {
+                    String maBB = csr.getString(0);
+                    String tenBB = csr.getString(1);
+                    String hinh = csr.getString(2);
+                    String noiDung = csr.getString(3);
+                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung));
+                } while (csr.moveToNext());
+            }
+        }
+        databaseAccess.close();
+        return arr;
+    }
+
+    public int getSoBienBaoCam()
+    {
+        databaseAccess.open();
+        String countQuery = "SELECT  * FROM BienBaoCam" ;
+        Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        databaseAccess.close();
+        return count;
+    }
+
+    public ArrayList<BienBao> getAllBienBaoHieuLenh(){
+        databaseAccess.open();
+        ArrayList<BienBao> arr = new ArrayList<>();
+        String sql = "select * from BienBaoHieuLenh";
+        csr = databaseAccess.getDb().rawQuery(sql, null);
+        if (csr != null) {
+            if (csr.moveToFirst()) {
+                do {
+                    String maBB = csr.getString(0);
+                    String tenBB = csr.getString(1);
+                    String hinh = csr.getString(2);
+                    String noiDung = csr.getString(3);
+                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung));
+                } while (csr.moveToNext());
+            }
+        }
+        databaseAccess.close();
+        return arr;
+    }
+}

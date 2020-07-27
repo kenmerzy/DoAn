@@ -4,7 +4,12 @@
     >
     <group>
         <item
-
+            android:id="@+id/tienTrinhHoanThanh"
+            android:title="0/25"
+            app:actionViewClass="android.widget.TextView"
+            app:showAsAction="always">
+        </item>
+        <item
             android:id="@+id/countdown"
             android:title="Time"
             app:actionViewClass="android.widget.TextView"

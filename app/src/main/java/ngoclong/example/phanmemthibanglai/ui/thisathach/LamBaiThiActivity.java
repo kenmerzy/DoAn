@@ -1,5 +1,6 @@
 package ngoclong.example.phanmemthibanglai.ui.thisathach;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,14 +18,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import ngoclong.example.phanmemthibanglai.R;
 
 public class LamBaiThiActivity extends AppCompatActivity {
 
     TextView timerText;
+    TextView tienTrinhHoanThanh;
 
+    ArrayList<CauHoi> arrCauHoi;
+    ArrayList<ArrayList<DapAn>> arrDapAn;
+
+    int tongSoCau;
+
+    public static int soCauDalam = 0;
     String[] items = {"1","2","3","4"};
     private static final int NUM_PAGES = 5;
 
@@ -55,7 +70,18 @@ public class LamBaiThiActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
+
+
+        CauHoiDAO ch = new CauHoiDAO(this);
+        arrCauHoi = ch.getAllCauHoi();
+        tongSoCau = arrCauHoi.size();
+        // Collections.shuffle(arrCauHoi);
+        DapAnDAO da = new DapAnDAO(this);
+        arrDapAn = da.getAllDapAn();
+
+
     }
+
     @Override
     public void onBackPressed() {
         if (mPager.getCurrentItem() == 0) {
@@ -67,6 +93,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
     }
+
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
@@ -74,7 +101,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new ScreenSlidePageFragment();
+            return new ScreenSlidePageFragment(arrCauHoi.get(position),arrDapAn.get(position),position);
         }
 
         @Override
@@ -89,8 +116,12 @@ public class LamBaiThiActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_lam_bai_thi, menu);
 
         MenuItem timerItem = menu.findItem(R.id.countdown);
-        MenuItem btnKT = menu.findItem(R.id.mnuKetThuc);
-         timerText = (TextView) MenuItemCompat.getActionView(timerItem);
+
+        MenuItem soCau = menu.findItem(R.id.tienTrinhHoanThanh);
+
+        tienTrinhHoanThanh = (TextView) MenuItemCompat.getActionView(soCau);
+
+        timerText = (TextView) MenuItemCompat.getActionView(timerItem);
 
         timerText.setPadding(10, 0, 20, 0); //Or something like that...
 
@@ -144,34 +175,6 @@ public class LamBaiThiActivity extends AppCompatActivity {
             ktd.show();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private class CustomAdapter extends BaseAdapter {
-        @Override
-        public int getCount() {
-            return items.length;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            View view1 = getLayoutInflater().inflate(R.layout.item_dap_an_lam_bai_thi,null);
-            TextView dapAn = view1.findViewById(R.id.tvDapAn);
-            ImageView image = view1.findViewById(R.id.imvLBT);
-
-            dapAn.setText("Đáp án" + items[i]);
-            image.setImageResource(R.drawable.ic_account_circle_green_24dp);
-            return view1;
-        }
     }
 
     public class ZoomOutPageTransformer implements ViewPager.PageTransformer {

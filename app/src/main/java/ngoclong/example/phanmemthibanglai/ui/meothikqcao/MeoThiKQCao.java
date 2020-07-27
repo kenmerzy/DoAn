@@ -31,8 +31,6 @@ public class MeoThiKQCao extends AppCompatActivity {
     }
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_tra_cuu_luat, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
     @Override

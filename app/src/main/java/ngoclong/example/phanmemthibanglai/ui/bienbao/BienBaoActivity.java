@@ -4,13 +4,18 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
+
 
 import ngoclong.example.phanmemthibanglai.R;
 
 public class BienBaoActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private  TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +36,21 @@ public class BienBaoActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_tra_cuu_luat, menu);
+        getMenuInflater().inflate(R.menu.menu_bien_bao, menu);
+        SearchView searchView = (SearchView) menu.findItem(R.id.searchView).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Toast.makeText(BienBaoActivity.this, s ,Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Log.d("Search Bien Bao", s);
+                return false;
+            }
+        });
 
         return super.onCreateOptionsMenu(menu);
     }
