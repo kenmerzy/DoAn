@@ -48,6 +48,17 @@ public class BienBaoDAO {
         databaseAccess.close();
         return count;
     }
+    public int getSoBienBaoHieuLenh()
+    {
+        databaseAccess.open();
+        String countQuery = "SELECT  * FROM BienBaoHieuLenh" ;
+        Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        databaseAccess.close();
+        return count;
+    }
+
 
     public ArrayList<BienBao> getAllBienBaoHieuLenh(){
         databaseAccess.open();

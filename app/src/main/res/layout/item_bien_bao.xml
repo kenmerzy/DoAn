@@ -31,11 +31,13 @@
             </TextView>
             <TextView
                 android:id="@+id/tvMoTaBienBao"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/tvTenBienBao"
+                android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mô tả biển báo"
-                android:textSize="15dp"
+                android:textSize="16dp"
                 >
             </TextView>
 
