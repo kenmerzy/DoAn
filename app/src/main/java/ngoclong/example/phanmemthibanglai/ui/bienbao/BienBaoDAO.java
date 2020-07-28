@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import ngoclong.example.phanmemthibanglai.ui.thisathach.DatabaseAccess;
-import ngoclong.example.phanmemthibanglai.ui.thisathach.DatabaseHelper;
+
 
 public class BienBaoDAO {
     Cursor csr = null;

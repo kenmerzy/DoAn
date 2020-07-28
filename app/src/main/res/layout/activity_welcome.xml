@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".ui.WelcomeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@android:color/holo_red_light" />
+
+        <TextView
+            android:id="@+id/txtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="ÔN THI GPLX A1"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textColorHighlight="@color/colorAccent"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/txtView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="PHÍA TRƯỚC TAY LÁI LÀ SỰ SỐNG"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textColorHighlight="@color/colorAccent"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="HÃY LÁI XE BẰNG CẢ CON TIM"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textColorHighlight="@color/colorAccent"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</RelativeLayout>

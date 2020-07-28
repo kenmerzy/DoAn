@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -27,6 +29,7 @@ import ngoclong.example.phanmemthibanglai.ui.tracuuluat.TraCuuLuatActivity;
 public class HomeFragment extends Fragment {
     private ViewFlipper viewFlipper;
     private GridView gridView;
+    Animation in,out;
 
     String[] items = {"THI SÁT HẠCH", "HỌC LÝ THUYẾT",
             " BIỂN BÁO \nĐƯỜNG BỘ", " MẸO THI \nKẾT QUẢ CAO",
@@ -48,6 +51,10 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle
             savedInstanceState) {
         viewFlipper = view.findViewById(R.id.Slideshow);
+        in = AnimationUtils.loadAnimation(getActivity(),R.anim.file_in);
+        out = AnimationUtils.loadAnimation(getActivity(),R.anim.file_out);
+        viewFlipper.setInAnimation(in);
+        viewFlipper.setOutAnimation(out);
         viewFlipper.setFlipInterval(3000);
         viewFlipper.setAutoStart(true);
         super.onViewCreated(view, savedInstanceState);
