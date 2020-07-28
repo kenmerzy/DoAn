@@ -28,8 +28,8 @@ public class BienBaoDAO {
                 do {
                     String maBB = csr.getString(0);
                     String tenBB = csr.getString(1);
-                    String hinh = csr.getString(2);
-                    String noiDung = csr.getString(3);
+                    String noiDung = csr.getString(2);
+                    String hinh = csr.getString(3);
                     arr.add(new BienBao(maBB,tenBB, hinh, noiDung));
                 } while (csr.moveToNext());
             }

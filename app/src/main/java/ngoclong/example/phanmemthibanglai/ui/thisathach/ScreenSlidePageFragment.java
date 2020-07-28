@@ -14,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import ngoclong.example.phanmemthibanglai.R;
@@ -61,6 +63,8 @@ public class ScreenSlidePageFragment extends Fragment {
         imageView = view.findViewById(R.id.imvCauHoi);
 
         tvCauHoi.setText("Câu "+String.valueOf(position + 1) +": "+c.getNoiDung());
+        String url = "file:///android_asset/images/"+c.getHinhAnh();
+        Picasso.with(getContext()).load(url).into(imageView);
         for (int i = 0; i < rdGrb.getChildCount(); i++) {
             ((RadioButton) rdGrb.getChildAt(i)).setText(arrDA.get(i).getNoiDung());
         }

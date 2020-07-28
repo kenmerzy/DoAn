@@ -41,7 +41,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
     public static int soCauDalam = 0;
     String[] items = {"1","2","3","4"};
-    private static final int NUM_PAGES = 5;
+    private static final int NUM_PAGES = 20;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
