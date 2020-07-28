@@ -40,18 +40,13 @@ public class LamBaiThiActivity extends AppCompatActivity {
     int tongSoCau;
 
     public static int soCauDalam = 0;
-    String[] items = {"1","2","3","4"};
+
     private static final int NUM_PAGES = 20;
 
-    /**
-     * The pager widget, which handles animation and allows swiping horizontally to access previous
-     * and next wizard steps.
-     */
+
     private ViewPager mPager;
 
-    /**
-     * The pager adapter, which provides the pages to the view pager widget.
-     */
+
     private PagerAdapter pagerAdapter;
 
     @Override

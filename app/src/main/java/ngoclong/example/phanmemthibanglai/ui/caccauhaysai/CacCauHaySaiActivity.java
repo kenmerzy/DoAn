@@ -14,7 +14,6 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
         assert  getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Các câu hỏi hay sai");
-
     }
     @Override
     public boolean onSupportNavigateUp()

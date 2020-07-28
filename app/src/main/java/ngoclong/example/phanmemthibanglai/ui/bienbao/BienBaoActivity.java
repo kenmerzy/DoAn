@@ -47,7 +47,7 @@ public class BienBaoActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                Log.d("Search Bien Bao", s);
+                Toast.makeText(BienBaoActivity.this, s ,Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
