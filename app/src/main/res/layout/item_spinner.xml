@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/layout1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/titleSpinner"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mẹo thi vòng số 8"
+                    android:layout_marginRight="20dp"
+                    android:textSize="20dp"
+                    android:id="@android:id/text1"
+                    style="?attr/spinnerDropDownItemStyle"
+                    android:padding="4dp"
+                    android:textColor="#000000">
+
+                </TextView>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    android:src="@drawable/ic_account_circle_green_24dp" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleSpinner"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layout2"
+            android:layout_below="@+id/layout1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/titleSpinner2"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mẹo thi vòng số 8"
+                    android:layout_marginRight="20dp"
+                    android:textSize="20dp"
+                    android:id="@android:id/text2"
+                    style="?attr/spinnerDropDownItemStyle"
+                    android:padding="4dp"
+                    android:textColor="#000000">
+
+                </TextView>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    android:src="@drawable/ic_account_circle_green_24dp" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleSpinner2"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layout3"
+            android:layout_below="@+id/layout2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/titleSpinner3"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mẹo thi vòng số 8"
+                    android:layout_marginRight="20dp"
+                    android:textSize="20dp"
+                    android:id="@android:id/text2"
+                    style="?attr/spinnerDropDownItemStyle"
+                    android:padding="4dp"
+                    android:textColor="#000000">
+
+                </TextView>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    android:src="@drawable/ic_account_circle_green_24dp" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleSpinner3"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layout4"
+            android:layout_below="@+id/layout2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/titleSpinner4"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mẹo thi vòng số 8"
+                    android:layout_marginRight="20dp"
+                    android:textSize="20dp"
+                    android:id="@android:id/text2"
+                    style="?attr/spinnerDropDownItemStyle"
+                    android:padding="4dp"
+                    android:textColor="#000000">
+
+                </TextView>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    android:src="@drawable/ic_account_circle_green_24dp" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleSpinner4"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layout5"
+            android:layout_below="@+id/layout1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/titleSpinner5"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mẹo thi vòng số 8"
+                    android:layout_marginRight="20dp"
+                    android:textSize="20dp"
+                    android:id="@android:id/text2"
+                    style="?attr/spinnerDropDownItemStyle"
+                    android:padding="4dp"
+                    android:textColor="#000000">
+
+                </TextView>
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#FFFFFF"
+                    android:src="@drawable/ic_account_circle_green_24dp" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleSpinner5"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

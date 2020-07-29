@@ -39,7 +39,6 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
     int tongSoCau;
 
-    public static int soCauDalam = 0;
 
     private static final int NUM_PAGES = 20;
 
@@ -70,7 +69,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
         CauHoiDAO ch = new CauHoiDAO(this);
         arrCauHoi = ch.getAllCauHoi();
         tongSoCau = arrCauHoi.size();
-        // Collections.shuffle(arrCauHoi);
+        Collections.shuffle(arrCauHoi);
         DapAnDAO da = new DapAnDAO(this);
         arrDapAn = da.getAllDapAn();
 
