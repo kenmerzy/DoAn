@@ -7,7 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import ngoclong.example.phanmemthibanglai.R;
 import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBaoActivity;
@@ -15,24 +25,34 @@ import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBaoAdapter;
 
 public class TraCuuLuatActivity extends AppCompatActivity {
 
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
+    private ArrayList<Luat> arrLuatXeMay;
+
+
+    TextView tvNoiDung;
+    TextView tvTienPhat;
+    ImageView imvHinhBienBao;
+    ListView listView;
+    int count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tra_cuu_luat);
         assert  getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Tra cứu luật");
-        initView();
+        getSupportActionBar().setTitle("Luật xe máy cơ bản");
 
+        TraCuuLuatDAO tcl = new TraCuuLuatDAO(TraCuuLuatActivity.this);
+        arrLuatXeMay = new ArrayList<Luat>();
+        arrLuatXeMay = tcl.getAllLuatXeMay();
+
+        count = tcl.getSoLuatxeMay();
+        listView = findViewById(R.id.listV_LuatXeMay);
+        CustomAdapter customAdapter = new CustomAdapter();
+        listView.setAdapter(customAdapter);
     }
-    private void initView() {
-        viewPager = findViewById(R.id.vPager);
-        tabLayout =findViewById(R.id.tabLayout);
-        viewPager.setAdapter(new TraCuuLuatAdapter(getSupportFragmentManager()));
-        tabLayout.setupWithViewPager(viewPager);
-    }
+
+
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_tra_cuu_luat, menu);
@@ -51,6 +71,37 @@ public class TraCuuLuatActivity extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+    private class CustomAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return count;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View convertView, ViewGroup parent) {
+            View view1 = getLayoutInflater().inflate(R.layout.item_luat, null);
+            tvNoiDung = view1.findViewById(R.id.txtNoiDungLuat);
+            tvTienPhat = view1.findViewById(R.id.txtMucPhat);
+            imvHinhBienBao = view1.findViewById(R.id.imvHinhLuat);
+
+            tvNoiDung.setText(arrLuatXeMay.get(i).getNoiDung());
+            tvTienPhat.setText(arrLuatXeMay.get(i).getMucPhat());
+            String url = "file:///android_asset/images/"+arrLuatXeMay.get(i).getHinh();
+            Picasso.with(TraCuuLuatActivity.this).load(url).into(imvHinhBienBao);
+            return view1;
+        }
     }
 
     @Override

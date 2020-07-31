@@ -23,7 +23,7 @@ public class BienBaoActivity extends AppCompatActivity {
 
         assert  getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Biển báo đường bộ");
+        getSupportActionBar().setTitle("Các loại biển báo");
         initView();
     }
 
