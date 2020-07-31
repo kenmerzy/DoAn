@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -27,22 +28,27 @@ import ngoclong.example.phanmemthibanglai.ui.caccauhaysai.CacCauHaySai;
 public class ScreenSlidePageFragment extends Fragment {
     CauHoi c;
     ArrayList<DapAn> arrDA;
+    ArrayList<DapAn> arrDapAnDung;
+    ArrayList<String> arrDapAnChon;
     int position;
     TextView tvCauHoi;
-    RadioGroup rdGrb;
+    RadioGroup rdGrp;
     RadioButton dapAn1;
     RadioButton dapAn2;
     RadioButton dapAn3;
     ImageView imageView;
+    int tongSoCau;
     public ScreenSlidePageFragment() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public ScreenSlidePageFragment(CauHoi c, ArrayList<DapAn> arrDA,int position) {
+    public ScreenSlidePageFragment(CauHoi c, ArrayList<DapAn> arrDA,int position,ArrayList<DapAn> arrDADung,int tongSoCau) {
         this.c = c;
         this.arrDA = arrDA;
         this.position = position;
+        this.arrDapAnDung = arrDADung;
+        this.tongSoCau = tongSoCau;
     }
 
     @Override
@@ -57,17 +63,38 @@ public class ScreenSlidePageFragment extends Fragment {
             savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvCauHoi = view.findViewById(R.id.tvCauHoi);
-        rdGrb = view.findViewById(R.id.grpDapAn);
+        rdGrp = view.findViewById(R.id.grpDapAn);
         dapAn1 = view.findViewById(R.id.rdBtnDapAn1);
         dapAn2 = view.findViewById(R.id.rdBtnDapAn2);
         dapAn3 = view.findViewById(R.id.rdBtnDapAn3);
         imageView = view.findViewById(R.id.imvCauHoi);
+        arrDapAnDung = new ArrayList<DapAn>();
+        arrDapAnChon = new ArrayList<String>();
+        for(int i = 0 ; i< tongSoCau; i++)
+            arrDapAnChon.add("None...");
 
         tvCauHoi.setText("Câu "+String.valueOf(position + 1) +": "+c.getNoiDung());
         String url = "file:///android_asset/images/"+c.getHinhAnh();
         Picasso.with(getContext()).load(url).into(imageView);
-        for (int i = 0; i < rdGrb.getChildCount(); i++) {
-            ((RadioButton) rdGrb.getChildAt(i)).setText(arrDA.get(i).getNoiDung());
+        for (int i = 0; i < rdGrp.getChildCount(); i++) {
+            ((RadioButton) rdGrp.getChildAt(i)).setText(arrDA.get(i).getNoiDung());
+
+        }
+
+        rdGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(dapAn1.isChecked())
+                    Toast.makeText(getContext(),"asdasdasdasdas", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+    private void updateListDapAnChon(int viTriCauHoi,int dapAnChon) {
+        if (dapAnChon == 1)
+        {
+              // arrDapAnChon.
         }
     }
 }
