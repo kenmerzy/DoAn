@@ -15,6 +15,7 @@ import ngoclong.example.phanmemthibanglai.R;
 public class ThiSatHachActivity extends AppCompatActivity {
 
     private GridView gridView;
+    TextView thiNgauNhien;
     String[] items = {"1","2","3","4","5","6"};
 
     @Override
@@ -27,7 +28,7 @@ public class ThiSatHachActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Thi sát hạch");
 
         gridView = findViewById(R.id.gridViewTSH);
-
+        thiNgauNhien = (TextView) findViewById(R.id.tvThiNgauNhien);
         ThiSatHachActivity.CustomAdapter customAdapter = new ThiSatHachActivity.CustomAdapter();
         gridView.setAdapter(customAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -38,6 +39,14 @@ public class ThiSatHachActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        thiNgauNhien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThiSatHachActivity.this, LamBaiThiActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
