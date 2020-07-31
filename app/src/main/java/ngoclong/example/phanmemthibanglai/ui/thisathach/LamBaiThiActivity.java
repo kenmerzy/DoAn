@@ -35,7 +35,6 @@ public class LamBaiThiActivity extends AppCompatActivity {
     TextView tienTrinhHoanThanh;
 
     ArrayList<CauHoi> arrCauHoi;
-    ArrayList<DapAn> arrDapAnDung;
     ArrayList<ArrayList<DapAn>> arrDapAn;
 
     int tongSoCau;
@@ -73,7 +72,8 @@ public class LamBaiThiActivity extends AppCompatActivity {
         Collections.shuffle(arrCauHoi);
         DapAnDAO da = new DapAnDAO(this);
         arrDapAn = da.getAllDapAn();
-        arrDapAnDung = da.getAllDapAnDung();
+
+
     }
 
     @Override
@@ -95,7 +95,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new ScreenSlidePageFragment(arrCauHoi.get(position),arrDapAn.get(position),position,arrDapAnDung,tongSoCau);
+            return new ScreenSlidePageFragment(arrCauHoi.get(position),arrDapAn.get(position),position);
         }
 
         @Override

@@ -37,6 +37,7 @@ public class DapAnDAO {
                         String noiDung = csr.getString(1);
                         int dungSai = csr.getInt(2);
                         int maCauHoi = csr.getInt(3);
+
                         arrSmall.add(new DapAn(maDapAn, noiDung, dungSai, maCauHoi));
 
                     } while (csr.moveToNext());
@@ -46,28 +47,5 @@ public class DapAnDAO {
         }
         databaseAccess.close();
         return arrBig;
-    }
-    public ArrayList<DapAn> getAllDapAnDung(){
-        databaseAccess.open();
-        ArrayList<DapAn> arr = new ArrayList<DapAn>();
-        String sql;
-        int soCauHoi = getSoCauHoi();
-        for (int i = 1; i <= soCauHoi ; i++) {
-            sql = "select * from DapAn where dungSai = 1 and maCauHoi =" + i;
-            csr = databaseAccess.getDb().rawQuery(sql, null);
-            if (csr != null) {
-                if (csr.moveToFirst()) {
-                    do {
-                        int maDapAn = csr.getInt(0);
-                        String noiDung = csr.getString(1);
-                        int dungSai = csr.getInt(2);
-                        int maCauHoi = csr.getInt(3);
-                        arr.add(new DapAn(maDapAn, noiDung, dungSai, maCauHoi));
-                    } while (csr.moveToNext());
-                }
-            }
-        }
-        databaseAccess.close();
-        return arr;
     }
 }
