@@ -3,9 +3,12 @@ package ngoclong.example.phanmemthibanglai.ui.thisathach;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+
+import java.util.Timer;
 
 import ngoclong.example.phanmemthibanglai.R;
 
@@ -13,12 +16,14 @@ public class KetThucDialog extends Dialog implements android.view.View.OnClickLi
 
     public Activity c;
     public Dialog d;
+    CountDownTimer timer;
     public Button btn_ketThuc, btn_huyBo;
 
-    public KetThucDialog(Activity a) {
+    public KetThucDialog(Activity a, CountDownTimer timer) {
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
+        this.timer = timer;
     }
 
     @Override
@@ -37,6 +42,8 @@ public class KetThucDialog extends Dialog implements android.view.View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_ketThuc:
+                timer.cancel();
+
                 dismiss();
                 break;
             case R.id.btn_huyBo:

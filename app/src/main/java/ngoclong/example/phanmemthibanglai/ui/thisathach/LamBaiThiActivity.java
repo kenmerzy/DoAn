@@ -33,13 +33,15 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
     TextView timerText;
     TextView tienTrinhHoanThanh;
-
+    public CountDownTimer timer;
     ArrayList<CauHoi> arrCauHoi;
     ArrayList<DapAn> arrDapAnDung;
     ArrayList<ArrayList<DapAn>> arrDapAn;
-    ArrayList<String> arrDapAnChon;
+    ArrayList<ChonDA> arrDapAnChon;
+    ScreenSlidePageFragment ssf;
     int tongSoCau;
     int ketQua;
+    boolean daThiXong;
 
 
     private static final int NUM_PAGES = 20;
@@ -54,6 +56,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lam_bai_thi);
 
+        daThiXong = false;
 
         CauHoiDAO ch = new CauHoiDAO(this);
         arrCauHoi = ch.getAllCauHoi();
@@ -63,9 +66,11 @@ public class LamBaiThiActivity extends AppCompatActivity {
         arrDapAn = da.getAllDapAn();
         arrDapAnDung = da.getAllDapAnDung();
 
-        arrDapAnChon = new ArrayList<String>();
-        for(int i = 0 ; i< NUM_PAGES; i++)
-            arrDapAnChon.add("None...");
+        arrDapAnChon = new ArrayList<ChonDA>();
+        for(int i = 0 ; i< NUM_PAGES; i++) {
+            ChonDA chd = new ChonDA(0,"Empty...");
+            arrDapAnChon.add(chd);
+        }
 
         mPager = (ViewPager) findViewById(R.id.pager);
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
@@ -80,33 +85,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
     }
-    public void updateListDapAnChon(int viTriCauHoi,int dapAnChon,String strDapAn) {
-        if (dapAnChon == 1)
-        {
-            arrDapAnChon.remove(viTriCauHoi);
-            arrDapAnChon.add(viTriCauHoi,strDapAn);
-        }
-        else if (dapAnChon == 2)
-        {
-            arrDapAnChon.remove(viTriCauHoi);
-            arrDapAnChon.add(viTriCauHoi,strDapAn);
-        }
-        else if (dapAnChon == 3)
-        {
-            arrDapAnChon.remove(viTriCauHoi);
-            arrDapAnChon.add(viTriCauHoi,strDapAn);
-        }
-    }
-    public int chamDiem()
-    {
-        int diem =0;
-        for (int i = 0; i<NUM_PAGES;i++)
-        {
-            if(arrDapAnDung.get(i).getNoiDung().equals(arrDapAnChon.get(i)))
-                diem++;
-        }
-        return diem;
-    }
+
 
     @Override
     public void onBackPressed() {
@@ -127,7 +106,9 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new ScreenSlidePageFragment(arrCauHoi.get(position),arrDapAn.get(position),position,NUM_PAGES,LamBaiThiActivity.this);
+
+            ssf =  new ScreenSlidePageFragment(arrCauHoi.get(position), arrDapAn.get(position), position, NUM_PAGES, LamBaiThiActivity.this,daThiXong);
+            return ssf;
         }
 
         @Override
@@ -166,7 +147,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
     private void startTimer(final long duration, long interval) {
 
-        final CountDownTimer timer = new CountDownTimer(duration, interval) {
+       timer = new CountDownTimer(duration, interval) {
 
             @Override
             public void onFinish() {
@@ -193,13 +174,47 @@ public class LamBaiThiActivity extends AppCompatActivity {
         timer.start();
     }
 
+    public void updateListDapAnChon(int viTriCauHoi,int dapAnChon,String noiDung) {
+        if (dapAnChon == 1)
+        {
+            arrDapAnChon.remove(viTriCauHoi);
+            ChonDA chd = new ChonDA(1,noiDung);
+            arrDapAnChon.add(viTriCauHoi,chd);
+        }
+        else if (dapAnChon == 2)
+        {
+            arrDapAnChon.remove(viTriCauHoi);
+            ChonDA chd = new ChonDA(2,noiDung);
+            arrDapAnChon.add(viTriCauHoi,chd);
+        }
+        else if (dapAnChon == 3)
+        {
+            arrDapAnChon.remove(viTriCauHoi);
+            ChonDA chd = new ChonDA(3,noiDung);
+            arrDapAnChon.add(viTriCauHoi,chd);
+        }
+    }
+    public int chamDiem()
+    {
+        int diem =0;
+        for (int i = 0; i<NUM_PAGES;i++)
+        {
+            if(arrDapAnDung.get(i).getNoiDung().equals(arrDapAnChon.get(i)))
+                diem++;
+        }
+        return diem;
+    }
+    public void ketThucBaiThi()
+    {
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.mnuKetThuc) {
-            KetThucDialog ktd = new KetThucDialog(LamBaiThiActivity.this);
+            KetThucDialog ktd = new KetThucDialog(LamBaiThiActivity.this,timer);
             ktd.show();
         }
         return super.onOptionsItemSelected(item);

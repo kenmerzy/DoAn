@@ -40,6 +40,9 @@ public class ScreenSlidePageFragment extends Fragment {
     int tongSoCau;
     int diem = 0;
     LamBaiThiActivity lbt;
+    boolean daThiXong;
+    String dapAnChon;
+    String dapAnDung;
 
 
     public ScreenSlidePageFragment() {
@@ -47,12 +50,13 @@ public class ScreenSlidePageFragment extends Fragment {
     }
 
     @SuppressLint("ValidFragment")
-    public ScreenSlidePageFragment(CauHoi c, ArrayList<DapAn> arrDA,int position,int tongSoCau,LamBaiThiActivity lbt) {
+    public ScreenSlidePageFragment(CauHoi c, ArrayList<DapAn> arrDA,int position,int tongSoCau,LamBaiThiActivity lbt, boolean daThiXong,String dapAnChon,String dapAnDung) {
         this.c = c;
         this.arrDA = arrDA;
         this.position = position;
         this.tongSoCau = tongSoCau;
         this.lbt = lbt;
+        this.daThiXong = daThiXong;
     }
 
     @Override
@@ -73,15 +77,7 @@ public class ScreenSlidePageFragment extends Fragment {
         dapAn3 = view.findViewById(R.id.rdBtnDapAn3);
         imageView = view.findViewById(R.id.imvCauHoi);
 
-
-        tvCauHoi.setText("Câu "+String.valueOf(position + 1) +": "+c.getNoiDung());
-        String url = "file:///android_asset/images/"+c.getHinhAnh();
-        Picasso.with(getContext()).load(url).into(imageView);
-        for (int i = 0; i < rdGrp.getChildCount(); i++) {
-            ((RadioButton) rdGrp.getChildAt(i)).setText(arrDA.get(i).getNoiDung());
-
-        }
-
+        loadCauHoi();
         rdGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -97,5 +93,34 @@ public class ScreenSlidePageFragment extends Fragment {
 
     }
 
+    private void loadCauHoi()
+    {
+        if(daThiXong)
+        {
+
+            tvCauHoi.setText("Câu "+String.valueOf(position + 1) +": "+c.getNoiDung());
+            String url = "file:///android_asset/images/"+c.getHinhAnh();
+            Picasso.with(getContext()).load(url).into(imageView);
+            for (int i = 0; i < rdGrp.getChildCount(); i++) {
+                ((RadioButton) rdGrp.getChildAt(i)).setText(arrDA.get(i).getNoiDung());
+            }
+        }
+        else
+        {
+            tvCauHoi.setText("Câu "+String.valueOf(position + 1) +": "+c.getNoiDung());
+            String url = "file:///android_asset/images/"+c.getHinhAnh();
+            Picasso.with(getContext()).load(url).into(imageView);
+            for (int i = 0; i < rdGrp.getChildCount(); i++) {
+                ((RadioButton) rdGrp.getChildAt(i)).setText(arrDA.get(i).getNoiDung());
+            }
+        }
+    }
+    private void setupRadioButton(boolean trueOrFalse)
+    {
+        for(int i=0 ; i <rdGrp.getChildCount(); i++)
+        {
+            rdGrp.getChildAt(i).setClickable(trueOrFalse);
+        }
+    }
 
 }
