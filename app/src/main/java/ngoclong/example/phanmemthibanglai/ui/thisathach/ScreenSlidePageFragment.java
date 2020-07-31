@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ngoclong.example.phanmemthibanglai.R;
 import ngoclong.example.phanmemthibanglai.ui.caccauhaysai.CacCauHaySai;
@@ -28,8 +29,7 @@ import ngoclong.example.phanmemthibanglai.ui.caccauhaysai.CacCauHaySai;
 public class ScreenSlidePageFragment extends Fragment {
     CauHoi c;
     ArrayList<DapAn> arrDA;
-    ArrayList<DapAn> arrDapAnDung;
-    ArrayList<String> arrDapAnChon;
+
     int position;
     TextView tvCauHoi;
     RadioGroup rdGrp;
@@ -38,17 +38,21 @@ public class ScreenSlidePageFragment extends Fragment {
     RadioButton dapAn3;
     ImageView imageView;
     int tongSoCau;
+    int diem = 0;
+    LamBaiThiActivity lbt;
+
+
     public ScreenSlidePageFragment() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public ScreenSlidePageFragment(CauHoi c, ArrayList<DapAn> arrDA,int position,ArrayList<DapAn> arrDADung,int tongSoCau) {
+    public ScreenSlidePageFragment(CauHoi c, ArrayList<DapAn> arrDA,int position,int tongSoCau,LamBaiThiActivity lbt) {
         this.c = c;
         this.arrDA = arrDA;
         this.position = position;
-        this.arrDapAnDung = arrDADung;
         this.tongSoCau = tongSoCau;
+        this.lbt = lbt;
     }
 
     @Override
@@ -68,10 +72,7 @@ public class ScreenSlidePageFragment extends Fragment {
         dapAn2 = view.findViewById(R.id.rdBtnDapAn2);
         dapAn3 = view.findViewById(R.id.rdBtnDapAn3);
         imageView = view.findViewById(R.id.imvCauHoi);
-        arrDapAnDung = new ArrayList<DapAn>();
-        arrDapAnChon = new ArrayList<String>();
-        for(int i = 0 ; i< tongSoCau; i++)
-            arrDapAnChon.add("None...");
+
 
         tvCauHoi.setText("Câu "+String.valueOf(position + 1) +": "+c.getNoiDung());
         String url = "file:///android_asset/images/"+c.getHinhAnh();
@@ -86,15 +87,15 @@ public class ScreenSlidePageFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if(dapAn1.isChecked())
-                    Toast.makeText(getContext(),"asdasdasdasdas", Toast.LENGTH_SHORT).show();
-
+                   lbt.updateListDapAnChon(position,1,dapAn1.getText().toString());
+                else if(dapAn2.isChecked())
+                    lbt.updateListDapAnChon(position,2,dapAn2.getText().toString());
+                else if(dapAn3.isChecked())
+                    lbt.updateListDapAnChon(position,3,dapAn3.getText().toString());
             }
         });
+
     }
-    private void updateListDapAnChon(int viTriCauHoi,int dapAnChon) {
-        if (dapAnChon == 1)
-        {
-              // arrDapAnChon.
-        }
-    }
+
+
 }

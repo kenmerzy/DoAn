@@ -37,12 +37,12 @@ public class LamBaiThiActivity extends AppCompatActivity {
     ArrayList<CauHoi> arrCauHoi;
     ArrayList<DapAn> arrDapAnDung;
     ArrayList<ArrayList<DapAn>> arrDapAn;
-
+    ArrayList<String> arrDapAnChon;
     int tongSoCau;
+    int ketQua;
 
 
     private static final int NUM_PAGES = 20;
-
 
     private ViewPager mPager;
 
@@ -54,18 +54,6 @@ public class LamBaiThiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lam_bai_thi);
 
-        mPager = (ViewPager) findViewById(R.id.pager);
-        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(pagerAdapter);
-
-        ViewPager mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setPageTransformer(true, new ZoomOutPageTransformer());
-
-        assert  getSupportActionBar() != null;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
-
-
 
         CauHoiDAO ch = new CauHoiDAO(this);
         arrCauHoi = ch.getAllCauHoi();
@@ -74,6 +62,50 @@ public class LamBaiThiActivity extends AppCompatActivity {
         DapAnDAO da = new DapAnDAO(this);
         arrDapAn = da.getAllDapAn();
         arrDapAnDung = da.getAllDapAnDung();
+
+        arrDapAnChon = new ArrayList<String>();
+        for(int i = 0 ; i< NUM_PAGES; i++)
+            arrDapAnChon.add("None...");
+
+        mPager = (ViewPager) findViewById(R.id.pager);
+        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager.setAdapter(pagerAdapter);
+
+
+        ViewPager mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setPageTransformer(true, new ZoomOutPageTransformer());
+
+        assert  getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
+
+    }
+    public void updateListDapAnChon(int viTriCauHoi,int dapAnChon,String strDapAn) {
+        if (dapAnChon == 1)
+        {
+            arrDapAnChon.remove(viTriCauHoi);
+            arrDapAnChon.add(viTriCauHoi,strDapAn);
+        }
+        else if (dapAnChon == 2)
+        {
+            arrDapAnChon.remove(viTriCauHoi);
+            arrDapAnChon.add(viTriCauHoi,strDapAn);
+        }
+        else if (dapAnChon == 3)
+        {
+            arrDapAnChon.remove(viTriCauHoi);
+            arrDapAnChon.add(viTriCauHoi,strDapAn);
+        }
+    }
+    public int chamDiem()
+    {
+        int diem =0;
+        for (int i = 0; i<NUM_PAGES;i++)
+        {
+            if(arrDapAnDung.get(i).getNoiDung().equals(arrDapAnChon.get(i)))
+                diem++;
+        }
+        return diem;
     }
 
     @Override
@@ -95,7 +127,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new ScreenSlidePageFragment(arrCauHoi.get(position),arrDapAn.get(position),position,arrDapAnDung,tongSoCau);
+            return new ScreenSlidePageFragment(arrCauHoi.get(position),arrDapAn.get(position),position,NUM_PAGES,LamBaiThiActivity.this);
         }
 
         @Override
@@ -151,8 +183,10 @@ public class LamBaiThiActivity extends AppCompatActivity {
                 String mnl = String.valueOf(minuteLeft);
                 if (secondsLeft < 10)
                     scl = "0"+secondsLeft;
-                if (minuteLeft < 10)
-                    mnl = "0"+ minuteLeft;
+                if (minuteLeft < 10) {
+                    mnl = "0" + minuteLeft;
+                    ketQua = chamDiem();
+                }
                 timerText.setText(mnl+ ":"+ scl);
             }
         };

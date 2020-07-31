@@ -21,7 +21,7 @@ public class BienBaoDAO {
         databaseAccess.open();
         ArrayList<BienBao> arr = new ArrayList<>();
 
-        String sql = "select * from BienBaoCam";
+        String sql = "select * from BienBao where LoaiBB = 0";
         csr = databaseAccess.getDb().rawQuery(sql, null);
         if (csr != null) {
             if (csr.moveToFirst()) {
@@ -30,7 +30,8 @@ public class BienBaoDAO {
                     String tenBB = csr.getString(1);
                     String noiDung = csr.getString(2);
                     String hinh = csr.getString(3);
-                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung));
+                    String loaiBB = csr.getString(4);
+                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung,loaiBB));
                 } while (csr.moveToNext());
             }
         }
@@ -41,7 +42,7 @@ public class BienBaoDAO {
     public int getSoBienBaoCam()
     {
         databaseAccess.open();
-        String countQuery = "SELECT  * FROM BienBaoCam" ;
+        String countQuery = "SELECT  * FROM BienBao where LoaiBB = 0" ;
         Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -51,7 +52,7 @@ public class BienBaoDAO {
     public int getSoBienBaoHieuLenh()
     {
         databaseAccess.open();
-        String countQuery = "SELECT  * FROM BienBaoHieuLenh" ;
+        String countQuery = "SELECT  * FROM BienBao where LoaiBB = 2" ;
         Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -63,7 +64,7 @@ public class BienBaoDAO {
     public ArrayList<BienBao> getAllBienBaoHieuLenh(){
         databaseAccess.open();
         ArrayList<BienBao> arr = new ArrayList<>();
-        String sql = "select * from BienBaoHieuLenh";
+        String sql = "select * from BienBao where LoaiBB = 2";
         csr = databaseAccess.getDb().rawQuery(sql, null);
         if (csr != null) {
             if (csr.moveToFirst()) {
@@ -72,7 +73,8 @@ public class BienBaoDAO {
                     String tenBB = csr.getString(1);
                     String noiDung = csr.getString(2);
                     String hinh = csr.getString(3);
-                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung));
+                    String loaiBB = csr.getString(4);
+                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung,loaiBB));
                 } while (csr.moveToNext());
             }
         }
@@ -82,7 +84,7 @@ public class BienBaoDAO {
     public int getSoBienBaoChiDan()
     {
         databaseAccess.open();
-        String countQuery = "SELECT  * FROM BienBaoChiDan" ;
+        String countQuery = "SELECT  * FROM BienBao where LoaiBB = 1" ;
         Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -93,7 +95,7 @@ public class BienBaoDAO {
     public ArrayList<BienBao> getAllBienBaoChiDan(){
         databaseAccess.open();
         ArrayList<BienBao> arr = new ArrayList<>();
-        String sql = "select * from BienBaoChiDan";
+        String sql = "select * from BienBao where LoaiBB = 1";
         csr = databaseAccess.getDb().rawQuery(sql, null);
         if (csr != null) {
             if (csr.moveToFirst()) {
@@ -102,7 +104,8 @@ public class BienBaoDAO {
                     String tenBB = csr.getString(1);
                     String noiDung = csr.getString(2);
                     String hinh = csr.getString(3);
-                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung));
+                    String loaiBB = csr.getString(4);
+                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung,loaiBB));
                 } while (csr.moveToNext());
             }
         }
@@ -113,7 +116,7 @@ public class BienBaoDAO {
     public int getSoBienBaoNguyHiem()
     {
         databaseAccess.open();
-        String countQuery = "SELECT  * FROM BienBaoNguyHiem" ;
+        String countQuery = "SELECT  * FROM BienBao where LoaiBB = 3" ;
         Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -125,7 +128,7 @@ public class BienBaoDAO {
     public ArrayList<BienBao> getAllBienBaoNguyHiem(){
         databaseAccess.open();
         ArrayList<BienBao> arr = new ArrayList<>();
-        String sql = "select * from BienBaoNguyHiem";
+        String sql = "select * from BienBao where LoaiBB = 3";
         csr = databaseAccess.getDb().rawQuery(sql, null);
         if (csr != null) {
             if (csr.moveToFirst()) {
@@ -134,7 +137,8 @@ public class BienBaoDAO {
                     String tenBB = csr.getString(1);
                     String noiDung = csr.getString(2);
                     String hinh = csr.getString(3);
-                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung));
+                    String loaiBB = csr.getString(4);
+                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung,loaiBB));
                 } while (csr.moveToNext());
             }
         }

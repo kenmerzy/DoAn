@@ -6,17 +6,16 @@ public class CauHoi {
     private int maCauHoi;
     private String noiDung;
     private String hinhAnh;
+    private String nhomCauHoi;
+    private String giaiThich;
 
-    public CauHoi() {
-
-    }
-
-    public CauHoi(int maCauHoi, String noiDung, String hinhAnh) {
+    public CauHoi(int maCauHoi, String noiDung, String giaiThich, String nhomCauHoi, String hinhAnh) {
         this.maCauHoi = maCauHoi;
         this.noiDung = noiDung;
         this.hinhAnh = hinhAnh;
+        this.nhomCauHoi = nhomCauHoi;
+        this.giaiThich = giaiThich;
     }
-
 
     public int getMaCauHoi() {
         return maCauHoi;
@@ -40,5 +39,21 @@ public class CauHoi {
 
     public void setHinhAnh(String hinhAnh) {
         this.hinhAnh = hinhAnh;
+    }
+
+    public String getNhomCauHoi() {
+        return nhomCauHoi;
+    }
+
+    public void setNhomCauHoi(String nhomCauHoi) {
+        this.nhomCauHoi = nhomCauHoi;
+    }
+
+    public String getGiaiThich() {
+        return giaiThich;
+    }
+
+    public void setGiaiThich(String giaiThich) {
+        this.giaiThich = giaiThich;
     }
 }

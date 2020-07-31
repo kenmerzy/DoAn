@@ -6,12 +6,14 @@ public class BienBao {
     private String tenBB;
     private String hinh;
     private String noiDung;
+    private String loadBB;
 
-    public BienBao(String maBB, String tenBB, String hinh, String noiDung) {
+    public BienBao(String maBB, String tenBB, String hinh, String noiDung, String loadBB) {
         this.maBB = maBB;
         this.tenBB = tenBB;
         this.hinh = hinh;
         this.noiDung = noiDung;
+        this.loadBB = loadBB;
     }
 
     public String getMaBB() {
@@ -44,5 +46,13 @@ public class BienBao {
 
     public void setNoiDung(String noiDung) {
         this.noiDung = noiDung;
+    }
+
+    public String getLoadBB() {
+        return loadBB;
+    }
+
+    public void setLoadBB(String loadBB) {
+        this.loadBB = loadBB;
     }
 }

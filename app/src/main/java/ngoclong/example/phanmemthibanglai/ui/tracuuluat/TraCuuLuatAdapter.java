@@ -8,18 +8,16 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class TraCuuLuatAdapter extends FragmentStatePagerAdapter {
 
-    private String listTab[] = {"Xe máy","Ô tô"};
+    private String listTab[] = {"Xe máy"};
 
     private XeMayFragment fragment_xemay;
-    private OtoFragment fragment_oto;
+
 
 
 
     public TraCuuLuatAdapter(FragmentManager fm) {
         super(fm);
         fragment_xemay = new XeMayFragment();
-        fragment_oto = new OtoFragment();
-
     }
 
     @Override
@@ -29,9 +27,6 @@ public class TraCuuLuatAdapter extends FragmentStatePagerAdapter {
         {
             case 0:
                 fr = fragment_xemay;
-                break;
-            case 1:
-                fr = fragment_oto;
                 break;
 
             default:

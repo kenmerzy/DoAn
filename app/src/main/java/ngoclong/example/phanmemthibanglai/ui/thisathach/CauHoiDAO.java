@@ -22,8 +22,10 @@ public class CauHoiDAO {
                 do {
                     int maCauHoi = csr.getInt(0);
                     String noiDung = csr.getString(1);
-                    String hinhAnh = csr.getString(2);
-                    arr.add(new CauHoi(maCauHoi, noiDung, hinhAnh));
+                    String giaiThich = csr.getString(2);
+                    String nhomCauHoi = csr.getString(3);
+                    String hinhAnh = csr.getString(4);
+                    arr.add(new CauHoi(maCauHoi,noiDung,giaiThich,nhomCauHoi,hinhAnh));
                 } while (csr.moveToNext());
             }
         }
