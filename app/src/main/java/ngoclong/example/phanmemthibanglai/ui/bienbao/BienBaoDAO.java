@@ -17,6 +17,18 @@ public class BienBaoDAO {
         databaseAccess = DatabaseAccess.getInstance(context);
     }
 
+
+
+    public int getSoBienBaoCam()
+    {
+        databaseAccess.open();
+        String countQuery = "SELECT  * FROM BienBao where LoaiBB = 0" ;
+        Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        databaseAccess.close();
+        return count;
+    }
     public ArrayList<BienBao> getAllBienBaoCam(){
         databaseAccess.open();
         ArrayList<BienBao> arr = new ArrayList<>();
@@ -38,16 +50,26 @@ public class BienBaoDAO {
         databaseAccess.close();
         return arr;
     }
-
-    public int getSoBienBaoCam()
-    {
+    public ArrayList<BienBao> getBienBaoCamBySearch(String search){
         databaseAccess.open();
-        String countQuery = "SELECT  * FROM BienBao where LoaiBB = 0" ;
-        Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
-        int count = cursor.getCount();
-        cursor.close();
+        ArrayList<BienBao> arr = new ArrayList<>();
+
+        String sql = "select * from BienBao where LoaiBB = 0 and TenBB like '%" + search + "%'";
+        csr = databaseAccess.getDb().rawQuery(sql, null);
+        if (csr != null) {
+            if (csr.moveToFirst()) {
+                do {
+                    String maBB = csr.getString(0);
+                    String tenBB = csr.getString(1);
+                    String noiDung = csr.getString(2);
+                    String hinh = csr.getString(3);
+                    String loaiBB = csr.getString(4);
+                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung,loaiBB));
+                } while (csr.moveToNext());
+            }
+        }
         databaseAccess.close();
-        return count;
+        return arr;
     }
     public int getSoBienBaoHieuLenh()
     {
@@ -65,6 +87,27 @@ public class BienBaoDAO {
         databaseAccess.open();
         ArrayList<BienBao> arr = new ArrayList<>();
         String sql = "select * from BienBao where LoaiBB = 2";
+        csr = databaseAccess.getDb().rawQuery(sql, null);
+        if (csr != null) {
+            if (csr.moveToFirst()) {
+                do {
+                    String maBB = csr.getString(0);
+                    String tenBB = csr.getString(1);
+                    String noiDung = csr.getString(2);
+                    String hinh = csr.getString(3);
+                    String loaiBB = csr.getString(4);
+                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung,loaiBB));
+                } while (csr.moveToNext());
+            }
+        }
+        databaseAccess.close();
+        return arr;
+    }
+    public ArrayList<BienBao> getBienBaoHieuLenhBySearch(String search){
+        databaseAccess.open();
+        ArrayList<BienBao> arr = new ArrayList<>();
+
+        String sql = "select * from BienBao where LoaiBB = 2 and TenBB like '%" + search + "%'";
         csr = databaseAccess.getDb().rawQuery(sql, null);
         if (csr != null) {
             if (csr.moveToFirst()) {
@@ -112,7 +155,27 @@ public class BienBaoDAO {
         databaseAccess.close();
         return arr;
     }
+    public ArrayList<BienBao> getBienBaoChiDanBySearch(String search){
+        databaseAccess.open();
+        ArrayList<BienBao> arr = new ArrayList<>();
 
+        String sql = "select * from BienBao where LoaiBB = 1 and TenBB like '%" + search + "%'";
+        csr = databaseAccess.getDb().rawQuery(sql, null);
+        if (csr != null) {
+            if (csr.moveToFirst()) {
+                do {
+                    String maBB = csr.getString(0);
+                    String tenBB = csr.getString(1);
+                    String noiDung = csr.getString(2);
+                    String hinh = csr.getString(3);
+                    String loaiBB = csr.getString(4);
+                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung,loaiBB));
+                } while (csr.moveToNext());
+            }
+        }
+        databaseAccess.close();
+        return arr;
+    }
     public int getSoBienBaoNguyHiem()
     {
         databaseAccess.open();
@@ -129,6 +192,27 @@ public class BienBaoDAO {
         databaseAccess.open();
         ArrayList<BienBao> arr = new ArrayList<>();
         String sql = "select * from BienBao where LoaiBB = 3";
+        csr = databaseAccess.getDb().rawQuery(sql, null);
+        if (csr != null) {
+            if (csr.moveToFirst()) {
+                do {
+                    String maBB = csr.getString(0);
+                    String tenBB = csr.getString(1);
+                    String noiDung = csr.getString(2);
+                    String hinh = csr.getString(3);
+                    String loaiBB = csr.getString(4);
+                    arr.add(new BienBao(maBB,tenBB, hinh, noiDung,loaiBB));
+                } while (csr.moveToNext());
+            }
+        }
+        databaseAccess.close();
+        return arr;
+    }
+    public ArrayList<BienBao> getBienBaoNguyHiemBySearch(String search){
+        databaseAccess.open();
+        ArrayList<BienBao> arr = new ArrayList<>();
+
+        String sql = "select * from BienBao where LoaiBB = 3 and TenBB like '%" + search + "%'";
         csr = databaseAccess.getDb().rawQuery(sql, null);
         if (csr != null) {
             if (csr.moveToFirst()) {

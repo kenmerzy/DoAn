@@ -107,7 +107,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
 
-            ssf =  new ScreenSlidePageFragment(arrCauHoi.get(position), arrDapAn.get(position), position, NUM_PAGES, LamBaiThiActivity.this,daThiXong);
+//            ssf =  new ScreenSlidePageFragment(arrCauHoi.get(position), arrDapAn.get(position), position, NUM_PAGES, LamBaiThiActivity.this,daThiXong);
             return ssf;
         }
 

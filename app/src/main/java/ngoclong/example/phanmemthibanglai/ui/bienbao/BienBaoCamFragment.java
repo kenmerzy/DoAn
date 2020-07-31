@@ -1,11 +1,18 @@
 package ngoclong.example.phanmemthibanglai.ui.bienbao;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -24,7 +31,10 @@ import ngoclong.example.phanmemthibanglai.R;
  */
 public class BienBaoCamFragment extends Fragment {
 
-    private ArrayList<BienBao> arrBienBaoCam;
+    private SearchView searchView = null;
+    private SearchView.OnQueryTextListener queryTextListener;
+    private BienBaoDAO bb;
+    private ArrayList<BienBao> arrBienBaoCam;//
 
 
     TextView tvTenBienBao;
@@ -48,26 +58,70 @@ public class BienBaoCamFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BienBaoDAO bb = new BienBaoDAO(getContext());
+        bb = new BienBaoDAO(getContext());
         arrBienBaoCam = new ArrayList<BienBao>();
-        arrBienBaoCam = bb.getAllBienBaoCam();
-
         count = bb.getSoBienBaoCam();
+        setHasOptionsMenu(true);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
         listView = view.findViewById(R.id.listV_BaoCam);
+        loadAllBBC();
+    }
+    private void loadAllBBC() {
+        arrBienBaoCam = bb.getAllBienBaoCam();
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
+    }//
+
+    private void loadBBCTheoSearch(String search) {
+        arrBienBaoCam = bb.getBienBaoCamBySearch(search);
+        if(arrBienBaoCam.size() > 0) {
+            CustomAdapter customAdapter = new CustomAdapter();
+            listView.setAdapter(customAdapter);
+            listView.setVisibility(View.VISIBLE);
+        }
+        else
+            listView.setVisibility(View.GONE);
+    }//
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_bien_bao, menu);
+        MenuItem searchItem = menu.findItem(R.id.searchView);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        if (searchItem != null){
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+            queryTextListener = new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    Log.i("Tìm kiếm ", s);
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    if(s.length() != 0)
+                        loadBBCTheoSearch(s);
+                    return true;
+                }
+            };
+            searchView.setOnQueryTextListener(queryTextListener);
+        }
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return count;
+            return arrBienBaoCam.size();
         }
 
         @Override
