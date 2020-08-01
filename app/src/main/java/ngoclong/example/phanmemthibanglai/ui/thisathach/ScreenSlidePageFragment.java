@@ -33,6 +33,8 @@ public class ScreenSlidePageFragment extends Fragment {
 
     int position;
     TextView tvCauHoi;
+    TextView tvGT;
+    TextView tvGiaiThichDapAn;
     RadioGroup rdGrp;
     RadioButton dapAn1;
     RadioButton dapAn2;
@@ -79,6 +81,8 @@ public class ScreenSlidePageFragment extends Fragment {
         dapAn1 = view.findViewById(R.id.rdBtnDapAn1);
         dapAn2 = view.findViewById(R.id.rdBtnDapAn2);
         dapAn3 = view.findViewById(R.id.rdBtnDapAn3);
+        tvGT = view.findViewById(R.id.tvGT);
+        tvGiaiThichDapAn = view.findViewById(R.id.tvGiaiThichDapAn);
         imageView = view.findViewById(R.id.imvCauHoi);
 
 
@@ -89,7 +93,8 @@ public class ScreenSlidePageFragment extends Fragment {
         for (int i = 0; i < rdGrp.getChildCount(); i++) {
             ((RadioButton) rdGrp.getChildAt(i)).setText(arrDA.get(i).getNoiDung());
         }
-        loadCauHoi();
+
+        hienThiCauDung();
 
         rdGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -118,17 +123,17 @@ public class ScreenSlidePageFragment extends Fragment {
     {
         daThiXong = trueOrFalse;
     }
-    public void loadCauHoi() {
+    public void hienThiCauDung() {
 
         if (daThiXong) {
             if (!dapAnChon.equals("Empty...")) {
                 if (dapAnChon.equals(dapAnDung.getNoiDung())) {
-                    ((RadioButton)(rdGrp.getChildAt(viTriChon-1))).setChecked(true);
                     toMau(dapAnDung.getViTriDung(), "#FF21E81B");
+                    danhDau(viTriChon);
                 } else {
-                    ((RadioButton)(rdGrp.getChildAt(viTriChon-1))).setChecked(true);
                     toMau(viTriChon, "#FFFF0000");
                     toMau(dapAnDung.getViTriDung(), "#FF21E81B");
+                    danhDau(viTriChon);
                 }
             } else {
                 toMau(dapAnDung.getViTriDung(), "#FF21E81B");
@@ -136,6 +141,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
 
             setupRadioButton(false);
+            hienGiaiThich();
         }
     }
 
@@ -149,6 +155,26 @@ public class ScreenSlidePageFragment extends Fragment {
             dapAn3.setTextColor(Color.parseColor(color));
         else
             return;
+    }
+    private void danhDau(int viTri)
+    {
+        if(viTri == 1)
+            if(!dapAn1.isChecked())
+                dapAn1.setChecked(true);
+        else if(viTri == 2)
+            if(!dapAn2.isChecked())
+                dapAn2.setChecked(true);
+        else if (viTri ==3)
+            if(!dapAn3.isChecked())
+                dapAn3.setChecked(true);
+        else
+            return;
+    }
+    private void hienGiaiThich()
+    {
+        tvGiaiThichDapAn.setText(c.getGiaiThich());
+        tvGT.setVisibility(View.VISIBLE);
+        tvGiaiThichDapAn.setVisibility(View.VISIBLE);
     }
     private void setupRadioButton(boolean trueOrFalse)
     {

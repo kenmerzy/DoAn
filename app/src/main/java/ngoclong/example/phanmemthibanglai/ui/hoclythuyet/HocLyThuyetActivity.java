@@ -10,15 +10,22 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
 import ngoclong.example.phanmemthibanglai.R;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.CauHoi;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.CauHoiDAO;
 
 public class HocLyThuyetActivity extends AppCompatActivity {
     ListView listView;
-    String[] items = {"1","2","3","4","5","6","7","8","9"};
-    int[] icons = {R.drawable.drivingicon, R.drawable.bookicon,
-            R.drawable.drivingicon, R.drawable.icon1,
-            R.drawable.iconaway, R.drawable.caricon,R.drawable.icon1,
-            R.drawable.iconaway, R.drawable.caricon};
+    ArrayList<CauHoi> arrCauHoi;
+    int count;
+    CauHoiDAO ch;
+
+    String[] icons = {"1","2","3","4"};
+    String[] titles = {"20 CÂU HỎI ĐIỂM LIỆT","KHÁI NIỆM VÀ QUY TẮC","VĂN HÓA VÀ ĐẠO ĐỨC LÁI XE","KỸ THUẬT LÁI XE"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,9 +35,11 @@ public class HocLyThuyetActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Học lý thuyết");
 
+        CauHoiDAO ch = new CauHoiDAO(HocLyThuyetActivity.this);
+        count = ch.getSoNhomALL();
         listView = findViewById(R.id.List_view);
 
-        HocLyThuyetActivity.CustomAdapter customAdapter = new HocLyThuyetActivity.CustomAdapter();
+        CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -44,7 +53,7 @@ public class HocLyThuyetActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return items.length;
+            return titles.length;
         }
 
         @Override
@@ -60,13 +69,17 @@ public class HocLyThuyetActivity extends AppCompatActivity {
         @Override
         public View getView(int i, View convertView, ViewGroup parent) {
             View view1 = getLayoutInflater().inflate(R.layout.hoc_ly_thuyet_listview_item,null);
+
             TextView title = view1.findViewById(R.id.txtHLTTitle);
             TextView description = view1.findViewById(R.id.txtHLTDesription);
-            TextView soCauHoi = view1.findViewById(R.id.txtHLTSoCauHoi);
             ImageView imv = view1.findViewById(R.id.imvHLT);
-            imv.setImageResource(icons[i]);
 
 
+
+            title.setText(titles[i]);
+            description.setText("Gồm "+ soCau +" câu hỏi");
+            String url = "file:///android_asset/images/" + icons[i];
+            Picasso.with(HocLyThuyetActivity.this).load(url).into(imv);
             return view1;
         }
     }

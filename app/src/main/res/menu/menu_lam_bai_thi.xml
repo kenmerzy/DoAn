@@ -4,17 +4,25 @@
     >
     <group>
         <item
-            android:id="@+id/tienTrinhHoanThanh"
-            android:title="0/25"
+            android:id="@+id/mnuTienTrinhHoanThanh"
+            android:title="0/20"
+            android:visible="true"
             app:actionViewClass="android.widget.TextView"
-            app:showAsAction="always">
-        </item>
+            app:showAsAction="always"/>
         <item
             android:id="@+id/countdown"
             android:title="Time"
             app:actionViewClass="android.widget.TextView"
-            app:showAsAction="always">
-        </item>
+            app:showAsAction="always"/>
+        <item
+        android:id="@+id/mnuDiem"
+        android:title="5/20"
+        android:visible="true"
+        app:actionViewClass="android.widget.TextView"
+        app:showAsAction="always"/>
+
+
+
         <item
             android:id="@+id/mnuKetThuc"
             android:title="KẾT THÚC"

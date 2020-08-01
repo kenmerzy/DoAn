@@ -73,7 +73,7 @@
             android:textSize="17dp"
             android:layout_margin="15dp"
             android:visibility="invisible"
-            android:padding="5dp"
+            android:padding="10dp"
             android:id="@+id/tvGiaiThichDapAn" />
 
     </RelativeLayout>

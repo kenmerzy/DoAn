@@ -12,17 +12,7 @@ public class DapAnDAO {
         databaseAccess = DatabaseAccess.getInstance(context);
     }
 
-    public int getSoCauHoi()
 
-    {
-        databaseAccess.open();
-        String countQuery = "SELECT  * FROM CauHoi" ;
-        Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
-        int count = cursor.getCount();
-        cursor.close();
-        databaseAccess.close();
-        return count;
-    }
     public ArrayList<ArrayList<DapAn>> getAllDapAn(ArrayList<CauHoi> arrCauHoi){
         databaseAccess.open();
         ArrayList<ArrayList<DapAn>> arrBig = new ArrayList<ArrayList<DapAn>>();

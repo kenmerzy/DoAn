@@ -41,20 +41,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gồm 20 câu hỏi"
+                android:layout_marginTop="10dp"
                 android:textSize="16dp"
                 >
 
             </TextView>
 
-            <TextView
-                android:id="@+id/txtHLTSoCauHoi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1/20"
-                android:textSize="14dp"
-                android:verticalSpacing="4dp"
-                >
-            </TextView>
         </LinearLayout>
     </LinearLayout>
 

@@ -33,6 +33,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
     TextView timerText;
     TextView tienTrinhHoanThanh;
+    TextView tvDiem;
     public CountDownTimer timer;
     ArrayList<CauHoi> arrCauHoi;
     ArrayList<DapAn> arrDapAnDung;
@@ -44,12 +45,15 @@ public class LamBaiThiActivity extends AppCompatActivity {
     int ketQua;
     boolean daThiXong;
     private boolean ketThuc;
+    MenuItem mnuKetThuc;
+    MenuItem mnuDiem;
+    MenuItem soCau;
+    MenuItem timerItem;
 
 
     private static final int NUM_PAGES = 20;
 
     private ViewPager mPager;
-
 
     private PagerAdapter pagerAdapter;
 
@@ -61,7 +65,6 @@ public class LamBaiThiActivity extends AppCompatActivity {
         daThiXong = false;
 
 
-
         CauHoiDAO ch = new CauHoiDAO(this);
         arrCauHoi = ch.getAllCauHoi();
         tongSoCau = arrCauHoi.size();
@@ -71,8 +74,8 @@ public class LamBaiThiActivity extends AppCompatActivity {
         arrDapAnDung = da.getAllDapAnDung(arrCauHoi);
 
         arrDapAnChon = new ArrayList<ChonDA>();
-        for(int i = 0 ; i< NUM_PAGES; i++) {
-            ChonDA chd = new ChonDA(0,"Empty...");
+        for (int i = 0; i < NUM_PAGES; i++) {
+            ChonDA chd = new ChonDA(0, "Empty...");
             arrDapAnChon.add(chd);
         }
 
@@ -81,16 +84,15 @@ public class LamBaiThiActivity extends AppCompatActivity {
         mPager.setAdapter(pagerAdapter);
 
 
-        ViewPager mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
-        assert  getSupportActionBar() != null;
+        assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
         listFragment = new ArrayList<ScreenSlidePageFragment>();
-        for(int i=0; i<NUM_PAGES ; i++) {
-            ssf =  new ScreenSlidePageFragment(arrCauHoi.get(i), arrDapAn.get(i), i, NUM_PAGES, LamBaiThiActivity.this,arrDapAnDung.get(i));
+        for (int i = 0; i < NUM_PAGES; i++) {
+            ssf = new ScreenSlidePageFragment(arrCauHoi.get(i), arrDapAn.get(i), i, NUM_PAGES, LamBaiThiActivity.this, arrDapAnDung.get(i));
             listFragment.add(ssf);
         }
     }
@@ -124,16 +126,41 @@ public class LamBaiThiActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_lam_bai_thi, menu);
 
-        MenuItem timerItem = menu.findItem(R.id.countdown);
+        timerItem = menu.findItem(R.id.countdown);
 
-        MenuItem soCau = menu.findItem(R.id.tienTrinhHoanThanh);
+        mnuKetThuc = menu.findItem(R.id.mnuKetThuc);
+
+        mnuDiem = menu.findItem(R.id.mnuDiem);
+
+        soCau = menu.findItem(R.id.mnuTienTrinhHoanThanh);
 
         tienTrinhHoanThanh = (TextView) MenuItemCompat.getActionView(soCau);
+
+        tvDiem = (TextView) MenuItemCompat.getActionView(mnuDiem);
+
+        tienTrinhHoanThanh.setPadding(10, 0, 20, 0); //Or something like that...
+
+        tienTrinhHoanThanh.setTypeface(null, Typeface.BOLD);
+
+        tienTrinhHoanThanh.setTextColor(Color.WHITE);
+
+        tienTrinhHoanThanh.setTextSize(17);
+
+        tienTrinhHoanThanh = (TextView) MenuItemCompat.getActionView(mnuDiem);
+
+        tvDiem.setPadding(10, 0, 20, 0); //Or something like that...
+
+        tvDiem.setTypeface(null, Typeface.BOLD);
+
+        tvDiem.setTextColor(Color.WHITE);
+
+        tvDiem.setTextSize(17);
 
         timerText = (TextView) MenuItemCompat.getActionView(timerItem);
 
@@ -148,74 +175,77 @@ public class LamBaiThiActivity extends AppCompatActivity {
         startTimer(150000, 1000); //One tick every second for 300 seconds
 
 
-
         return super.onCreateOptionsMenu(menu);
     }
 
     private void startTimer(final long duration, long interval) {
 
-       timer = new CountDownTimer(duration, interval) {
+        timer = new CountDownTimer(duration, interval) {
 
             @Override
             public void onFinish() {
                 timerText.setText("00:00");
+                ketThucBaiThi();
+
             }
 
             @Override
             public void onTick(long millisecondsLeft) {
-                int secondsLeft = (int) ((millisecondsLeft % 60000)/1000);
-                int minuteLeft = (int) ((millisecondsLeft/60000));
+                int secondsLeft = (int) ((millisecondsLeft % 60000) / 1000);
+                int minuteLeft = (int) ((millisecondsLeft / 60000));
                 if (minuteLeft < 2)
                     timerText.setTextColor(Color.parseColor("#FF0000"));
                 String scl = String.valueOf(secondsLeft);
                 String mnl = String.valueOf(minuteLeft);
                 if (secondsLeft < 10)
-                    scl = "0"+secondsLeft;
+                    scl = "0" + secondsLeft;
                 if (minuteLeft < 10) {
                     mnl = "0" + minuteLeft;
-                    ketQua = chamDiem();
+
                 }
-                timerText.setText(mnl+ ":"+ scl);
+                timerText.setText(mnl + ":" + scl);
             }
         };
         timer.start();
     }
 
-    public void updateListDapAnChon(int viTriCauHoi,int dapAnChon,String noiDung) {
-        if (dapAnChon == 1)
-        {
+    public void updateListDapAnChon(int viTriCauHoi, int dapAnChon, String noiDung) {
+        if (dapAnChon == 1) {
             arrDapAnChon.remove(viTriCauHoi);
-            ChonDA chd = new ChonDA(1,noiDung);
-            arrDapAnChon.add(viTriCauHoi,chd);
-        }
-        else if (dapAnChon == 2)
-        {
+            ChonDA chd = new ChonDA(1, noiDung);
+            arrDapAnChon.add(viTriCauHoi, chd);
+        } else if (dapAnChon == 2) {
             arrDapAnChon.remove(viTriCauHoi);
-            ChonDA chd = new ChonDA(2,noiDung);
-            arrDapAnChon.add(viTriCauHoi,chd);
-        }
-        else if (dapAnChon == 3)
-        {
+            ChonDA chd = new ChonDA(2, noiDung);
+            arrDapAnChon.add(viTriCauHoi, chd);
+        } else if (dapAnChon == 3) {
             arrDapAnChon.remove(viTriCauHoi);
-            ChonDA chd = new ChonDA(3,noiDung);
-            arrDapAnChon.add(viTriCauHoi,chd);
+            ChonDA chd = new ChonDA(3, noiDung);
+            arrDapAnChon.add(viTriCauHoi, chd);
         }
     }
-    public int chamDiem()
-    {
-        int diem =0;
-        for (int i = 0; i<NUM_PAGES;i++)
-        {
-            if(arrDapAnDung.get(i).getNoiDung().equals(arrDapAnChon.get(i)))
+
+    public int chamDiem() {
+        int diem = 0;
+        for (int i = 0; i < NUM_PAGES; i++) {
+            if (arrDapAnDung.get(i).getNoiDung().equals(arrDapAnChon.get(i).getNoiDung()))
                 diem++;
         }
         return diem;
     }
-    public void ketThucBaiThi()
-    {
-        for(int i=0; i<NUM_PAGES ; i++) {
+
+    public void ketThucBaiThi() {
+        for (int i = 0; i < NUM_PAGES; i++) {
             listFragment.get(i).setThiXong(true);
         }
+        ketQua = chamDiem();
+        tvDiem.setText("Điểm: " + String.valueOf(ketQua) + "/" + NUM_PAGES);
+        mnuKetThuc.setVisible(false);
+        mnuDiem.setVisible(true);
+        int p = mPager.getCurrentItem();
+        mPager.setAdapter(pagerAdapter);
+
+
     }
     public void setKetThuc(boolean value)
     {
