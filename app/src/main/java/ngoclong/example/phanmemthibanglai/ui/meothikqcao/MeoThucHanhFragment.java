@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ import ngoclong.example.phanmemthibanglai.R;
  * A simple {@link Fragment} subclass.
  */
 public class MeoThucHanhFragment extends Fragment {
-    Spinner spinner4,spinner5,spinner6,spinner7,spinner8;
+    ListView listView;
+    String[] items = {"1","2","3","4","5","6","7","8","9"};
     public MeoThucHanhFragment() {
         // Required empty public constructor
     }
@@ -29,6 +31,7 @@ public class MeoThucHanhFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_meo_thuc_hanh, container, false);
+
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

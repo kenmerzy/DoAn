@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ import ngoclong.example.phanmemthibanglai.R;
 public class MeoLyThuyetFragment extends Fragment {
 
     Spinner spinner,spinner2,spinner3;
+    ListView listView;
+    String[] items = {"1","2","3","4","5","6","7","8","9"};
     public MeoLyThuyetFragment() {
         // Required empty public constructor
     }
