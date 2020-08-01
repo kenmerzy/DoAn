@@ -39,7 +39,8 @@ public class DapAnDAO {
                         String noiDung = csr.getString(1);
                         int dungSai = csr.getInt(2);
                         int maCauHoi = csr.getInt(3);
-                        arrSmall.add(new DapAn(maDapAn, noiDung, dungSai, maCauHoi));
+                        int vitriDung = csr.getInt(4);
+                        arrSmall.add(new DapAn(maDapAn, noiDung, dungSai, maCauHoi,vitriDung));
 
                     } while (csr.moveToNext());
                 }
@@ -63,7 +64,8 @@ public class DapAnDAO {
                         String noiDung = csr.getString(1);
                         int dungSai = csr.getInt(2);
                         int maCauHoi = csr.getInt(3);
-                        arr.add(new DapAn(maDapAn, noiDung, dungSai, maCauHoi));
+                        int vitriDung = csr.getInt(4);
+                        arr.add(new DapAn(maDapAn, noiDung, dungSai, maCauHoi,vitriDung));
                     } while (csr.moveToNext());
                 }
             }

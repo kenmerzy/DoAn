@@ -41,10 +41,11 @@ public class ScreenSlidePageFragment extends Fragment {
     int tongSoCau;
     int diem = 0;
     LamBaiThiActivity lbt;
-    boolean daThiXong;
-    String dapAnChon;
+    boolean daThiXong = false;
+    String dapAnChon= "Empty..." ;
     DapAn dapAnDung;
-    int viTriChon;
+    int viTriChon = 0;
+    int viTriDung = 0;
 
 
     public ScreenSlidePageFragment() {
@@ -79,9 +80,17 @@ public class ScreenSlidePageFragment extends Fragment {
         dapAn2 = view.findViewById(R.id.rdBtnDapAn2);
         dapAn3 = view.findViewById(R.id.rdBtnDapAn3);
         imageView = view.findViewById(R.id.imvCauHoi);
-        daThiXong = false;
 
+
+
+        tvCauHoi.setText("Câu "+String.valueOf(position + 1) +": "+c.getNoiDung());
+        String url = "file:///android_asset/images/"+c.getHinhAnh();
+        Picasso.with(getContext()).load(url).into(imageView);
+        for (int i = 0; i < rdGrp.getChildCount(); i++) {
+            ((RadioButton) rdGrp.getChildAt(i)).setText(arrDA.get(i).getNoiDung());
+        }
         loadCauHoi();
+
         rdGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
@@ -109,41 +118,35 @@ public class ScreenSlidePageFragment extends Fragment {
     {
         daThiXong = trueOrFalse;
     }
-    public void loadCauHoi()
-    {
-        if(daThiXong)
-        {
-            // so sánh đáp án chọn với đáp án đúng. Tô màu câu hỏi. Disable radioButton;
+    public void loadCauHoi() {
 
-            if(dapAnChon.equals(dapAnDung)) {
-
+        if (daThiXong) {
+            if (!dapAnChon.equals("Empty...")) {
+                if (dapAnChon.equals(dapAnDung.getNoiDung())) {
+                    ((RadioButton)(rdGrp.getChildAt(viTriChon-1))).setChecked(true);
+                    toMau(dapAnDung.getViTriDung(), "#FF21E81B");
+                } else {
+                    ((RadioButton)(rdGrp.getChildAt(viTriChon-1))).setChecked(true);
+                    toMau(viTriChon, "#FFFF0000");
+                    toMau(dapAnDung.getViTriDung(), "#FF21E81B");
                 }
-
-
-
-            else
-            {
-
+            } else {
+                toMau(dapAnDung.getViTriDung(), "#FF21E81B");
             }
-        }
-        else
-        {
-            tvCauHoi.setText("Câu "+String.valueOf(position + 1) +": "+c.getNoiDung());
-            String url = "file:///android_asset/images/"+c.getHinhAnh();
-            Picasso.with(getContext()).load(url).into(imageView);
-            for (int i = 0; i < rdGrp.getChildCount(); i++) {
-                ((RadioButton) rdGrp.getChildAt(i)).setText(arrDA.get(i).getNoiDung());
-            }
+
+
+            setupRadioButton(false);
         }
     }
-    private void toMau(int viTri)
+
+    private void toMau(int viTriToMau,String color)
     {
-        if(viTri == 1)
-            dapAn1.setTextColor(Color.parseColor("#FF21E81B"));
-        else if(viTri == 2)
-            dapAn2.setTextColor(Color.parseColor("#FF21E81B"));
-        else if (viTri ==3)
-            dapAn3.setTextColor(Color.parseColor("#FF21E81B"));
+        if(viTriToMau == 1)
+            dapAn1.setTextColor(Color.parseColor(color));
+        else if(viTriToMau == 2)
+            dapAn2.setTextColor(Color.parseColor(color));
+        else if (viTriToMau ==3)
+            dapAn3.setTextColor(Color.parseColor(color));
         else
             return;
     }

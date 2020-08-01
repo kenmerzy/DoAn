@@ -65,7 +65,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
         CauHoiDAO ch = new CauHoiDAO(this);
         arrCauHoi = ch.getAllCauHoi();
         tongSoCau = arrCauHoi.size();
-        Collections.shuffle(arrCauHoi);
+        //Collections.shuffle(arrCauHoi);
         DapAnDAO da = new DapAnDAO(this);
         arrDapAn = da.getAllDapAn(arrCauHoi);
         arrDapAnDung = da.getAllDapAnDung(arrCauHoi);
@@ -213,12 +213,9 @@ public class LamBaiThiActivity extends AppCompatActivity {
     }
     public void ketThucBaiThi()
     {
-//        for(int i=0 ; i< NUM_PAGES; i++)
-//        {
-//            listFragment.get(i).setThiXong(true);
-//            listFragment.get(i).setDapAnChon(arrDapAnChon.get(i).getNoiDung(),arrDapAnDung.get(i).getNoiDung(),arrDapAnChon.get(i).getViTri());
-//            listFragment.get(i).loadCauHoi();
-//        }
+        for(int i=0; i<NUM_PAGES ; i++) {
+            listFragment.get(i).setThiXong(true);
+        }
     }
     public void setKetThuc(boolean value)
     {

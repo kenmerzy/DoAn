@@ -5,17 +5,14 @@ public class DapAn {
     private String noiDung;
     private int dungSai;
     private int maCauHoi;
+    private int viTriDung;
 
-
-    public DapAn() {
-
-    }
-
-    public DapAn(int maDapAn, String noiDung, int dungSai, int maCauHoi) {
+    public DapAn(int maDapAn, String noiDung, int dungSai, int maCauHoi, int viTriDung) {
         this.maDapAn = maDapAn;
         this.noiDung = noiDung;
         this.dungSai = dungSai;
         this.maCauHoi = maCauHoi;
+        this.viTriDung = viTriDung;
     }
 
     public int getMaDapAn() {
@@ -48,5 +45,13 @@ public class DapAn {
 
     public void setMaCauHoi(int maCauHoi) {
         this.maCauHoi = maCauHoi;
+    }
+
+    public int getViTriDung() {
+        return viTriDung;
+    }
+
+    public void setViTriDung(int viTriDung) {
+        this.viTriDung = viTriDung;
     }
 }
