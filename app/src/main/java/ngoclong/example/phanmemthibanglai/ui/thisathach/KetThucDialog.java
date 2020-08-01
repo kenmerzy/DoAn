@@ -14,12 +14,12 @@ import ngoclong.example.phanmemthibanglai.R;
 
 public class KetThucDialog extends Dialog implements android.view.View.OnClickListener {
 
-    public Activity c;
+    public LamBaiThiActivity c;
     public Dialog d;
     CountDownTimer timer;
     public Button btn_ketThuc, btn_huyBo;
 
-    public KetThucDialog(Activity a, CountDownTimer timer) {
+    public KetThucDialog(LamBaiThiActivity a, CountDownTimer timer) {
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
@@ -43,10 +43,12 @@ public class KetThucDialog extends Dialog implements android.view.View.OnClickLi
         switch (v.getId()) {
             case R.id.btn_ketThuc:
                 timer.cancel();
-
+                c.setKetThuc(true);
+                c.ketThucBaiThi();
                 dismiss();
                 break;
             case R.id.btn_huyBo:
+                c.setKetThuc(false);
                 dismiss();
                 break;
             default:

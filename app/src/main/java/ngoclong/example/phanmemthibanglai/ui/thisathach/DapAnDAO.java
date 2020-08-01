@@ -13,22 +13,24 @@ public class DapAnDAO {
     }
 
     public int getSoCauHoi()
+
     {
+        databaseAccess.open();
         String countQuery = "SELECT  * FROM CauHoi" ;
         Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
+        databaseAccess.close();
         return count;
     }
-    public ArrayList<ArrayList<DapAn>> getAllDapAn(){
+    public ArrayList<ArrayList<DapAn>> getAllDapAn(ArrayList<CauHoi> arrCauHoi){
         databaseAccess.open();
         ArrayList<ArrayList<DapAn>> arrBig = new ArrayList<ArrayList<DapAn>>();
         ArrayList<DapAn> arrSmall;
         String sql;
-        int soCauHoi = getSoCauHoi();
-        for (int i = 1; i <= soCauHoi ; i++) {
+        for (int i = 0; i < arrCauHoi.size() ; i++) {
             arrSmall = new ArrayList<DapAn>();
-            sql = "select * from DapAn where maCauHoi = " + i;
+            sql = "select * from DapAn where maCauHoi = " + arrCauHoi.get(i).getMaCauHoi();
             csr = databaseAccess.getDb().rawQuery(sql, null);
             if (csr != null) {
                 if (csr.moveToFirst()) {
@@ -47,13 +49,12 @@ public class DapAnDAO {
         databaseAccess.close();
         return arrBig;
     }
-    public ArrayList<DapAn> getAllDapAnDung(){
+    public ArrayList<DapAn> getAllDapAnDung(ArrayList<CauHoi> arrCauHoi){
         databaseAccess.open();
         ArrayList<DapAn> arr = new ArrayList<DapAn>();
         String sql;
-        int soCauHoi = getSoCauHoi();
-        for (int i = 1; i <= soCauHoi ; i++) {
-            sql = "select * from DapAn where dungSai = 1 and maCauHoi =" + i;
+        for (int i = 0; i < arrCauHoi.size() ; i++) {
+            sql = "select * from DapAn where dungSai = 1 and maCauHoi =" + arrCauHoi.get(i).getMaCauHoi();
             csr = databaseAccess.getDb().rawQuery(sql, null);
             if (csr != null) {
                 if (csr.moveToFirst()) {

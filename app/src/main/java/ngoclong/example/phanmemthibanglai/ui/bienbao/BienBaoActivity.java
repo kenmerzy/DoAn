@@ -36,22 +36,6 @@ public class BienBaoActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_bien_bao, menu);
-        SearchView searchView = (SearchView) menu.findItem(R.id.searchView).getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                Toast.makeText(BienBaoActivity.this, s ,Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                Toast.makeText(BienBaoActivity.this, s ,Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
         return super.onCreateOptionsMenu(menu);
     }
 

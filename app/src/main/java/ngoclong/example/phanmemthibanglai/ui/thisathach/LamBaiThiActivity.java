@@ -38,10 +38,12 @@ public class LamBaiThiActivity extends AppCompatActivity {
     ArrayList<DapAn> arrDapAnDung;
     ArrayList<ArrayList<DapAn>> arrDapAn;
     ArrayList<ChonDA> arrDapAnChon;
+    ArrayList<ScreenSlidePageFragment> listFragment;
     ScreenSlidePageFragment ssf;
     int tongSoCau;
     int ketQua;
     boolean daThiXong;
+    private boolean ketThuc;
 
 
     private static final int NUM_PAGES = 20;
@@ -58,13 +60,15 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         daThiXong = false;
 
+
+
         CauHoiDAO ch = new CauHoiDAO(this);
         arrCauHoi = ch.getAllCauHoi();
         tongSoCau = arrCauHoi.size();
         Collections.shuffle(arrCauHoi);
         DapAnDAO da = new DapAnDAO(this);
-        arrDapAn = da.getAllDapAn();
-        arrDapAnDung = da.getAllDapAnDung();
+        arrDapAn = da.getAllDapAn(arrCauHoi);
+        arrDapAnDung = da.getAllDapAnDung(arrCauHoi);
 
         arrDapAnChon = new ArrayList<ChonDA>();
         for(int i = 0 ; i< NUM_PAGES; i++) {
@@ -84,8 +88,12 @@ public class LamBaiThiActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
+        listFragment = new ArrayList<ScreenSlidePageFragment>();
+        for(int i=0; i<NUM_PAGES ; i++) {
+            ssf =  new ScreenSlidePageFragment(arrCauHoi.get(i), arrDapAn.get(i), i, NUM_PAGES, LamBaiThiActivity.this,arrDapAnDung.get(i));
+            listFragment.add(ssf);
+        }
     }
-
 
     @Override
     public void onBackPressed() {
@@ -106,10 +114,10 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            return listFragment.get(position);
 
-            ssf =  new ScreenSlidePageFragment(arrCauHoi.get(position), arrDapAn.get(position), position, NUM_PAGES, LamBaiThiActivity.this,daThiXong);
-            return ssf;
         }
+
 
         @Override
         public int getCount() {
@@ -206,8 +214,18 @@ public class LamBaiThiActivity extends AppCompatActivity {
     }
     public void ketThucBaiThi()
     {
-
+//        for(int i=0 ; i< NUM_PAGES; i++)
+//        {
+//            listFragment.get(i).setThiXong(true);
+//            listFragment.get(i).setDapAnChon(arrDapAnChon.get(i).getNoiDung(),arrDapAnDung.get(i).getNoiDung(),arrDapAnChon.get(i).getViTri());
+//            listFragment.get(i).loadCauHoi();
+//        }
     }
+    public void setKetThuc(boolean value)
+    {
+        ketThuc = value;
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
