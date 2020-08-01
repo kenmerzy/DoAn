@@ -33,26 +33,7 @@ public class CauHoiDAO {
         return arr;
     }
 
-    public int getSoNhomALL()
-    {
-        databaseAccess.open();
-        String countQuery = "select count(DISTINCT NhomCauHoi) from CauHoi " ;
-        Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
-        int count = cursor.getCount();
-        cursor.close();
-        databaseAccess.close();
-        return count;
-    }
-    public int getSoCauHoiTheoNhom(String maNhom)
-    {
-        databaseAccess.open();
-        String countQuery = "select count(*) from CauHoi where NhomCauHoi = " + maNhom ;
-        Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
-        int count = cursor.getCount();
-        cursor.close();
-        databaseAccess.close();
-        return count;
-    }
+
     public ArrayList<CauHoi> getCauHoiTheoNhom(String maNhom){
         databaseAccess.open();
         ArrayList<CauHoi> arr = new ArrayList<>();

@@ -14,8 +14,8 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/imvHLT"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:src="@drawable/ic_account_circle_green_24dp" />
             />
         </RelativeLayout>
@@ -31,7 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20 CÂU HỎI ĐIỂM LIỆT"
-                android:textSize="23dp"
+                android:textColor="#000000"
+                android:textSize="20dp"
                 >
 
             </TextView>
@@ -42,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:text="Gồm 20 câu hỏi"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/colorPrimary"
                 android:textSize="16dp"
                 >
 

@@ -21,9 +21,8 @@ import ngoclong.example.phanmemthibanglai.ui.thisathach.CauHoiDAO;
 public class HocLyThuyetActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<CauHoi> arrCauHoi;
-    int count;
-    CauHoiDAO ch;
-
+    ArrayList<ArrayList<CauHoi>>arrayListsCH;
+    CauHoiDAO cauHoiDAO;
     String[] icons = {"1","2","3","4"};
     String[] titles = {"20 CÂU HỎI ĐIỂM LIỆT","KHÁI NIỆM VÀ QUY TẮC","VĂN HÓA VÀ ĐẠO ĐỨC LÁI XE","KỸ THUẬT LÁI XE"};
     @Override
@@ -34,10 +33,18 @@ public class HocLyThuyetActivity extends AppCompatActivity {
         assert  getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Học lý thuyết");
+        arrayListsCH = new ArrayList<ArrayList<CauHoi>>();
+        cauHoiDAO = new CauHoiDAO(HocLyThuyetActivity.this);
+        for(int i=0 ; i< titles.length; i++) {
+            arrCauHoi = new ArrayList<CauHoi>();
+            arrCauHoi = cauHoiDAO.getCauHoiTheoNhom(String.valueOf(i));
+            arrayListsCH.add(arrCauHoi);
 
-        CauHoiDAO ch = new CauHoiDAO(HocLyThuyetActivity.this);
-        count = ch.getSoNhomALL();
+        }
+
+
         listView = findViewById(R.id.List_view);
+
 
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
@@ -77,8 +84,10 @@ public class HocLyThuyetActivity extends AppCompatActivity {
 
 
             title.setText(titles[i]);
-            description.setText("Gồm "+ soCau +" câu hỏi");
-            String url = "file:///android_asset/images/" + icons[i];
+            description.setText("Gồm "+ arrayListsCH.get(i).size() +" câu hỏi");
+
+            //String url = "file:///android_asset/images/" + icons[i];
+            String url = "file:///android_asset/images/l8.jpg";
             Picasso.with(HocLyThuyetActivity.this).load(url).into(imv);
             return view1;
         }

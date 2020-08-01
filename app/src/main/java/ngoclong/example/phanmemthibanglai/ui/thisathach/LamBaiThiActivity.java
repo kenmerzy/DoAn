@@ -73,6 +73,8 @@ public class LamBaiThiActivity extends AppCompatActivity {
         arrDapAn = da.getAllDapAn(arrCauHoi);
         arrDapAnDung = da.getAllDapAnDung(arrCauHoi);
 
+
+
         arrDapAnChon = new ArrayList<ChonDA>();
         for (int i = 0; i < NUM_PAGES; i++) {
             ChonDA chd = new ChonDA(0, "Empty...");
