@@ -1,9 +1,7 @@
-package ngoclong.example.phanmemthibanglai.ui.thisathach;
+package ngoclong.example.phanmemthibanglai.ui.hoclythuyet;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,76 +10,91 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import ngoclong.example.phanmemthibanglai.R;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.CauHoi;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.CauHoiDAO;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.ChonDA;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.DapAn;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.DapAnDAO;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.KetThucDialog;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.LamBaiThiActivity;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.ScreenSlidePageFragment;
 
-public class LamBaiThiActivity extends AppCompatActivity {
+public class HocTheoChuDeActivity extends AppCompatActivity {
 
-    TextView timerText;
-    TextView tienTrinhHoanThanh;
-    TextView tvDiem;
-    public CountDownTimer timer;
     ArrayList<CauHoi> arrCauHoi;
     ArrayList<DapAn> arrDapAnDung;
+
     ArrayList<ArrayList<DapAn>> arrDapAn;
     ArrayList<ChonDA> arrDapAnChon;
-    ArrayList<ScreenSlidePageFragment> listFragment;
-    ScreenSlidePageFragment ssf;
+    ArrayList<HocTheoChuDeFragment> listFragment;
+    HocTheoChuDeFragment hocTheoChuDeFragment;
     int tongSoCau;
-    int ketQua;
-    boolean daThiXong;
-    private boolean ketThuc;
-    MenuItem mnuKetThuc;
-    MenuItem mnuDiem;
+
+    CauHoiDAO cauHoiDAO;
     MenuItem soCau;
-    MenuItem timerItem;
+    MenuItem mnuKetThuc;
 
-    private static final int NUM_PAGES = 20;
-
+    private int numPages;
     private ViewPager mPager;
-
     private PagerAdapter pagerAdapter;
+
+    ArrayList<ChuDeHocLyThuyet> arrChuDe;
+    ChuDeHocLyThuyetDAO chuDeHocLyThuyetDAO;
+    int count;
+    int chuDe;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lam_bai_thi);
+        setContentView(R.layout.activity_hoc_theo_chu_de);
 
-        daThiXong = false;
+
+        Bundle b = getIntent().getExtras();
+        if (b != null)
+            chuDe = b.getInt("chuDe");
+
+
+        arrChuDe = new ArrayList<ChuDeHocLyThuyet>();
+        chuDeHocLyThuyetDAO = new ChuDeHocLyThuyetDAO(HocTheoChuDeActivity.this);
+        arrChuDe = chuDeHocLyThuyetDAO.getALLChuDeHocLyThuyet();
+        count = arrChuDe.size();
 
 
         CauHoiDAO ch = new CauHoiDAO(this);
-        arrCauHoi = ch.getAllCauHoi();
+        arrCauHoi = ch.getCauHoiTheoNhom(String.valueOf(chuDe)); // Chưa code DAO
         tongSoCau = arrCauHoi.size();
         //Collections.shuffle(arrCauHoi);
+
         DapAnDAO da = new DapAnDAO(this);
         arrDapAn = da.getAllDapAn(arrCauHoi);
         arrDapAnDung = da.getAllDapAnDung(arrCauHoi);
-
+        numPages = tongSoCau;
 
 
         arrDapAnChon = new ArrayList<ChonDA>();
-        for (int i = 0; i < NUM_PAGES; i++) {
+        for (int i = 0; i < numPages; i++) {
             ChonDA chd = new ChonDA(0, "Empty...");
             arrDapAnChon.add(chd);
         }
 
-        mPager = (ViewPager) findViewById(R.id.pager);
-        pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        mPager = (ViewPager) findViewById(R.id.pagerHocLT);
+        pagerAdapter = new HocTheoChuDeAdapter(getSupportFragmentManager());
         mPager.setAdapter(pagerAdapter);
 
 
@@ -89,16 +102,15 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle(arrChuDe.get(chuDe).getTenChuDe());
 
-        listFragment = new ArrayList<ScreenSlidePageFragment>();
-        for (int i = 0; i < NUM_PAGES; i++) {
-            ssf = new ScreenSlidePageFragment(arrCauHoi.get(i), arrDapAn.get(i), i, NUM_PAGES, LamBaiThiActivity.this, arrDapAnDung.get(i));
-            listFragment.add(ssf);
+        listFragment = new ArrayList<HocTheoChuDeFragment>();
+        for (int i = 0; i < numPages; i++) {
+            hocTheoChuDeFragment = new HocTheoChuDeFragment(arrCauHoi.get(i), arrDapAn.get(i), i, numPages, HocTheoChuDeActivity.this, arrDapAnDung.get(i));
+            listFragment.add(hocTheoChuDeFragment);
         }
     }
 
-    @Override
     public void onBackPressed() {
         if (mPager.getCurrentItem() == 0) {
             // If the user is currently looking at the first step, allow the system to handle the
@@ -110,8 +122,8 @@ public class LamBaiThiActivity extends AppCompatActivity {
         }
     }
 
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
+    private class HocTheoChuDeAdapter extends FragmentStatePagerAdapter {
+        public HocTheoChuDeAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -123,7 +135,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return NUM_PAGES;
+            return numPages;
         }
     }
 
@@ -133,82 +145,19 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.menu_lam_bai_thi, menu);
 
-        timerItem = menu.findItem(R.id.countdown);
-
-        mnuKetThuc = menu.findItem(R.id.mnuKetThuc);
-
-        mnuDiem = menu.findItem(R.id.mnuDiem);
+        mnuKetThuc = menu.findItem((R.id.mnuKetThuc));
+        mnuKetThuc.setVisible(false);
 
         soCau = menu.findItem(R.id.mnuTienTrinhHoanThanh);
 
-        tienTrinhHoanThanh = (TextView) MenuItemCompat.getActionView(soCau);
+        soCau.setVisible(true);
 
-        tvDiem = (TextView) MenuItemCompat.getActionView(mnuDiem);
-
-        tienTrinhHoanThanh.setPadding(10, 0, 20, 0); //Or something like that...
-
-        tienTrinhHoanThanh.setTypeface(null, Typeface.BOLD);
-
-        tienTrinhHoanThanh.setTextColor(Color.WHITE);
-
-        tienTrinhHoanThanh.setTextSize(17);
-
-        tienTrinhHoanThanh = (TextView) MenuItemCompat.getActionView(mnuDiem);
-
-        tvDiem.setPadding(10, 0, 20, 0); //Or something like that...
-
-        tvDiem.setTypeface(null, Typeface.BOLD);
-
-        tvDiem.setTextColor(Color.WHITE);
-
-        tvDiem.setTextSize(17);
-
-        timerText = (TextView) MenuItemCompat.getActionView(timerItem);
-
-        timerText.setPadding(10, 0, 20, 0); //Or something like that...
-
-        timerText.setTypeface(null, Typeface.BOLD);
-
-        timerText.setTextColor(Color.WHITE);
-
-        timerText.setTextSize(17);
-
-        startTimer(150000, 1000); //One tick every second for 300 seconds
+        soCau.setTitle("Số câu đã làm");
 
 
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void startTimer(final long duration, long interval) {
-
-        timer = new CountDownTimer(duration, interval) {
-
-            @Override
-            public void onFinish() {
-                timerText.setText("00:00");
-                ketThucBaiThi();
-
-            }
-
-            @Override
-            public void onTick(long millisecondsLeft) {
-                int secondsLeft = (int) ((millisecondsLeft % 60000) / 1000);
-                int minuteLeft = (int) ((millisecondsLeft / 60000));
-                if (minuteLeft < 2)
-                    timerText.setTextColor(Color.parseColor("#FF0000"));
-                String scl = String.valueOf(secondsLeft);
-                String mnl = String.valueOf(minuteLeft);
-                if (secondsLeft < 10)
-                    scl = "0" + secondsLeft;
-                if (minuteLeft < 10) {
-                    mnl = "0" + minuteLeft;
-
-                }
-                timerText.setText(mnl + ":" + scl);
-            }
-        };
-        timer.start();
-    }
 
     public void updateListDapAnChon(int viTriCauHoi, int dapAnChon, String noiDung) {
         if (dapAnChon == 1) {
@@ -226,45 +175,9 @@ public class LamBaiThiActivity extends AppCompatActivity {
         }
     }
 
-    public int chamDiem() {
-        int diem = 0;
-        for (int i = 0; i < NUM_PAGES; i++) {
-            if (arrDapAnDung.get(i).getNoiDung().equals(arrDapAnChon.get(i).getNoiDung()))
-                diem++;
-        }
-        return diem;
+    public void changedViTriCauHoiDangLam(int viTriDangLam) {
+            soCau.setTitle(viTriDangLam + "/" + tongSoCau);
     }
-
-    public void ketThucBaiThi() {
-        for (int i = 0; i < NUM_PAGES; i++) {
-            listFragment.get(i).setThiXong(true);
-        }
-        ketQua = chamDiem();
-        tvDiem.setText("Điểm: " + String.valueOf(ketQua) + "/" + NUM_PAGES);
-        mnuKetThuc.setVisible(false);
-        mnuDiem.setVisible(true);
-        int p = mPager.getCurrentItem();
-        mPager.setAdapter(pagerAdapter);
-
-
-    }
-    public void setKetThuc(boolean value)
-    {
-        ketThuc = value;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.mnuKetThuc) {
-            KetThucDialog ktd = new KetThucDialog(LamBaiThiActivity.this,timer);
-            ktd.show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.85f;
         private static final float MIN_ALPHA = 0.5f;
@@ -309,5 +222,14 @@ public class LamBaiThiActivity extends AppCompatActivity {
         finish();
         return true;
     }
-
 }
+
+
+
+
+
+
+
+
+
+

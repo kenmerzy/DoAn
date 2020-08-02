@@ -1,33 +1,34 @@
-package ngoclong.example.phanmemthibanglai.ui.thisathach;
+package ngoclong.example.phanmemthibanglai.ui.hoclythuyet;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import ngoclong.example.phanmemthibanglai.R;
-import ngoclong.example.phanmemthibanglai.ui.caccauhaysai.CacCauHaySai;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.CauHoi;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.DapAn;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.LamBaiThiActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ScreenSlidePageFragment extends Fragment {
+public class HocTheoChuDeFragment extends Fragment {
+
     CauHoi c;
     ArrayList<DapAn> arrDA;
     int position;
@@ -41,24 +42,21 @@ public class ScreenSlidePageFragment extends Fragment {
     ImageView imageView;
     int tongSoCau;
     int diem = 0;
-    LamBaiThiActivity lbt;
-    boolean daThiXong = false;
-    String dapAnChon= "Empty..." ;
+    HocTheoChuDeActivity hocTheoChuDeActivity;
+    String dapAnChon = "Empty..." ;
     DapAn dapAnDung;
     int viTriChon = 0;
 
-
-    public ScreenSlidePageFragment() {
+    public HocTheoChuDeFragment() {
         // Required empty public constructor
     }
-
     @SuppressLint("ValidFragment")
-    public ScreenSlidePageFragment(CauHoi c, ArrayList<DapAn> arrDA,int position,int tongSoCau,LamBaiThiActivity lbt,DapAn daDung) {
+    public HocTheoChuDeFragment(CauHoi c, ArrayList<DapAn> arrDA, int position, int tongSoCau, HocTheoChuDeActivity hocTheoChuDeActivity, DapAn daDung) {
         this.c = c;
         this.arrDA = arrDA;
         this.position = position;
         this.tongSoCau = tongSoCau;
-        this.lbt = lbt;
+        this.hocTheoChuDeActivity = hocTheoChuDeActivity;
         dapAnDung = daDung;
 
     }
@@ -66,14 +64,14 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-            // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_screen_slide_page, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_hoc_theo_chu_de, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle
-            savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         tvCauHoi = view.findViewById(R.id.tvCauHoi);
         rdGrp = view.findViewById(R.id.grpDapAn);
         dapAn1 = view.findViewById(R.id.rdBtnDapAn1);
@@ -84,7 +82,6 @@ public class ScreenSlidePageFragment extends Fragment {
         imageView = view.findViewById(R.id.imvCauHoi);
 
 
-
         tvCauHoi.setText("Câu "+String.valueOf(position + 1) +": "+c.getNoiDung());
         String url = "file:///android_asset/images/"+c.getHinhAnh();
         Picasso.with(getContext()).load(url).into(imageView);
@@ -92,7 +89,6 @@ public class ScreenSlidePageFragment extends Fragment {
             ((RadioButton) rdGrp.getChildAt(i)).setText(arrDA.get(i).getNoiDung());
         }
 
-        hienThiCauDung();
 
         rdGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -101,48 +97,66 @@ public class ScreenSlidePageFragment extends Fragment {
                 if(dapAn1.isChecked()) {
                     viTriChon = 1;
                     dapAnChon = dapAn1.getText().toString();
-                    lbt.updateListDapAnChon(position, 1, dapAn1.getText().toString());
+                    hocTheoChuDeActivity.updateListDapAnChon(position, 1, dapAn1.getText().toString());
+                    hienThiCauDung();
                 }
                 else if(dapAn2.isChecked()) {
                     viTriChon = 2;
                     dapAnChon = dapAn2.getText().toString();
-                    lbt.updateListDapAnChon(position, 2, dapAn2.getText().toString());
+                    hocTheoChuDeActivity.updateListDapAnChon(position, 2, dapAn2.getText().toString());
+                    hienThiCauDung();
                 }
                 else if(dapAn3.isChecked()) {
                     viTriChon = 3;
                     dapAnChon = dapAn3.getText().toString();
-                    lbt.updateListDapAnChon(position, 3, dapAn3.getText().toString());
+                    hocTheoChuDeActivity.updateListDapAnChon(position, 3, dapAn3.getText().toString());
+                    hienThiCauDung();
                 }
             }
         });
+    }
 
-    }
-    public void setThiXong(boolean trueOrFalse)
-    {
-        daThiXong = trueOrFalse;
-    }
     public void hienThiCauDung() {
-
-        if (daThiXong) {
-            if (!dapAnChon.equals("Empty...")) {
-                if (dapAnChon.equals(dapAnDung.getNoiDung())) {
-                    toMau(dapAnDung.getViTriDung(), "#FF21E81B");
-                    danhDau(viTriChon);
-                } else {
-                    toMau(viTriChon, "#FFFF0000");
-                    toMau(dapAnDung.getViTriDung(), "#FF21E81B");
-                    danhDau(viTriChon);
-                }
-            } else {
-                toMau(dapAnDung.getViTriDung(), "#FF21E81B");
-            }
-
-
-            setupRadioButton(false);
-            hienGiaiThich();
+        if (viTriChon != 0) {
+           checkDapAnVaToMau(viTriChon,dapAnDung.getViTriDung());
         }
     }
 
+    private void checkDapAnVaToMau(int viTriChon, int viTriDung)
+    {
+        if(viTriChon == viTriDung) {
+            if (viTriChon == 1) {
+                resetMau();
+                dapAn1.setTextColor(Color.parseColor("#FF21E81B"));
+            }
+            else if (viTriChon == 2)
+            {
+                resetMau();
+                dapAn2.setTextColor(Color.parseColor("#FF21E81B"));
+
+            }
+            else if (viTriChon == 3) {
+                resetMau();
+                dapAn3.setTextColor(Color.parseColor("#FF21E81B"));
+            }
+            hienGiaiThich(true);
+        }
+        else if(viTriChon != viTriDung)
+        {
+            resetMau();
+            toMau(viTriChon,"#FFFF0000");
+            hienGiaiThich(false);
+        }
+        else
+            return;
+    }
+
+    private void resetMau()
+    {
+        dapAn1.setTextColor(Color.parseColor("#000000"));
+        dapAn2.setTextColor(Color.parseColor("#000000"));
+        dapAn3.setTextColor(Color.parseColor("#000000"));
+    }
     private void toMau(int viTriToMau,String color)
     {
         if(viTriToMau == 1)
@@ -154,32 +168,22 @@ public class ScreenSlidePageFragment extends Fragment {
         else
             return;
     }
-    private void danhDau(int viTri)
+
+    private void hienGiaiThich(boolean hien)
     {
-        if(viTri == 1)
-            if(!dapAn1.isChecked())
-                dapAn1.setChecked(true);
-        else if(viTri == 2)
-            if(!dapAn2.isChecked())
-                dapAn2.setChecked(true);
-        else if (viTri ==3)
-            if(!dapAn3.isChecked())
-                dapAn3.setChecked(true);
-        else
-            return;
-    }
-    private void hienGiaiThich()
-    {
-        tvGiaiThichDapAn.setText(c.getGiaiThich());
-        tvGT.setVisibility(View.VISIBLE);
-        tvGiaiThichDapAn.setVisibility(View.VISIBLE);
-    }
-    private void setupRadioButton(boolean trueOrFalse)
-    {
-        for(int i=0 ; i <rdGrp.getChildCount(); i++)
+        if(hien)
         {
-            rdGrp.getChildAt(i).setClickable(trueOrFalse);
+            tvGiaiThichDapAn.setText(c.getGiaiThich());
+            tvGT.setVisibility(View.VISIBLE);
+            tvGiaiThichDapAn.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tvGT.setVisibility(View.GONE);
+            tvGiaiThichDapAn.setVisibility(View.GONE);
         }
     }
 
+
 }
+

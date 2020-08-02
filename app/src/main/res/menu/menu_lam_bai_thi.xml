@@ -7,7 +7,6 @@
             android:id="@+id/mnuTienTrinhHoanThanh"
             android:title="0/20"
             android:visible="true"
-            app:actionViewClass="android.widget.TextView"
             app:showAsAction="always"/>
         <item
             android:id="@+id/countdown"

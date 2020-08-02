@@ -37,7 +37,7 @@ public class CauHoiDAO {
     public ArrayList<CauHoi> getCauHoiTheoNhom(String maNhom){
         databaseAccess.open();
         ArrayList<CauHoi> arr = new ArrayList<>();
-        String sql = "select * from CauHoi where NhomCauHoi = " + maNhom;
+        String sql = "select * from CauHoi where MaNhomCH = " + maNhom;
         csr = databaseAccess.getDb().rawQuery(sql, null);
         if (csr != null) {
             if (csr.moveToFirst()) {

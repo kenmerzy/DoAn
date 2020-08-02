@@ -8,14 +8,21 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 import ngoclong.example.phanmemthibanglai.R;
+import ngoclong.example.phanmemthibanglai.ui.hoclythuyet.ChuDeHocLyThuyet;
+import ngoclong.example.phanmemthibanglai.ui.hoclythuyet.ChuDeHocLyThuyetDAO;
+import ngoclong.example.phanmemthibanglai.ui.hoclythuyet.HocTheoChuDeActivity;
+import ngoclong.example.phanmemthibanglai.ui.hoclythuyet.HocTheoChuDeFragment;
 import ngoclong.example.phanmemthibanglai.ui.thisathach.CauHoi;
 import ngoclong.example.phanmemthibanglai.ui.thisathach.CauHoiDAO;
+import ngoclong.example.phanmemthibanglai.ui.thisathach.ChonDA;
 import ngoclong.example.phanmemthibanglai.ui.thisathach.DapAn;
 import ngoclong.example.phanmemthibanglai.ui.thisathach.DapAnDAO;
 import ngoclong.example.phanmemthibanglai.ui.thisathach.LamBaiThiActivity;
@@ -23,14 +30,25 @@ import ngoclong.example.phanmemthibanglai.ui.thisathach.ScreenSlidePageFragment;
 
 public class CacCauHaySaiActivity extends AppCompatActivity {
 
-    ArrayList<CacCauHaySai> arrCauHaySai;
-
+    ArrayList<CauHoi> arrCauHaySai;
+    ArrayList<DapAn> arrDapAnDung;
+    ArrayList<ArrayList<DapAn>> arrDapAn;
+    ArrayList<ChonDA> arrDapAnChon;
+    ArrayList<CacCauHaySaiFragment> listFragment;
+    CacCauHaySaiFragment cacCauHaySaiFragment;
     int tongSoCau;
 
+    CauHoiDAO cauHoiDAO;
+    MenuItem soCau;
+    MenuItem mnuKetThuc;
 
+
+    private int numPages;
     private ViewPager mPager;
-
     private PagerAdapter pagerAdapter;
+    int count;
+    int chuDe;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +58,7 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
         pagerAdapter = new CacCauHaySaiAdapter(getSupportFragmentManager());
         mPager.setAdapter(pagerAdapter);
 
+
         ViewPager mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
@@ -47,10 +66,32 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
-        CacCauHaySaiDAO chs = new CacCauHaySaiDAO(this);
-        //arrCauHaySai = chs.getClass();
+        cauHoiDAO = new CauHoiDAO(this);
+        arrCauHaySai = cauHoiDAO.getCauHoiTheoNhom(String.valueOf(0));
         tongSoCau = arrCauHaySai.size();
-        Collections.shuffle(arrCauHaySai);
+        //Collections.shuffle(arrCauHaySai);
+
+        DapAnDAO da = new DapAnDAO(this);
+        arrDapAn = da.getAllDapAn(arrCauHaySai);
+        arrDapAnDung = da.getAllDapAnDung(arrCauHaySai);
+        numPages = tongSoCau;
+
+
+        arrDapAnChon = new ArrayList<ChonDA>();
+        for (int i = 0; i < numPages; i++) {
+            ChonDA chd = new ChonDA(0, "Empty...");
+            arrDapAnChon.add(chd);
+        }
+
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Bộ câu hỏi đa số người thi hay làm sai");
+
+        listFragment = new ArrayList<CacCauHaySaiFragment>();
+        for (int i = 0; i < numPages; i++) {
+            CacCauHaySaiFragment cacCauHaySaiFragment = new CacCauHaySaiFragment(arrCauHaySai.get(i), arrDapAn.get(i), i, numPages, CacCauHaySaiActivity.this, arrDapAnDung.get(i));
+            listFragment.add(cacCauHaySaiFragment);
+        }
 
     }
 
@@ -61,24 +102,49 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new CacCauHaySaiFragment(arrCauHaySai,position);
+            return listFragment.get(position);
         }
-//        @Override
-//        public void onBackPressed() {
-//            if (mPager.getCurrentItem() == 0) {
-//                // If the user is currently looking at the first step, allow the system to handle the
-//                // Back button. This calls finish() on this activity and pops the back stack.
-//                super.onBackPressed();
-//            } else {
-//                // Otherwise, select the previous step.
-//                mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-//            }
-//
-//        }
+
 
         @Override
         public int getCount() {
-            return tongSoCau;
+            return numPages;
+        }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_lam_bai_thi, menu);
+
+        mnuKetThuc = menu.findItem((R.id.mnuKetThuc));
+        mnuKetThuc.setVisible(false);
+
+        soCau = menu.findItem(R.id.mnuTienTrinhHoanThanh);
+
+        soCau.setVisible(true);
+
+        soCau.setTitle("Số câu đã làm");
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    public void updateListDapAnChon(int viTriCauHoi, int dapAnChon, String noiDung) {
+        if (dapAnChon == 1) {
+            arrDapAnChon.remove(viTriCauHoi);
+            ChonDA chd = new ChonDA(1, noiDung);
+            arrDapAnChon.add(viTriCauHoi, chd);
+        } else if (dapAnChon == 2) {
+            arrDapAnChon.remove(viTriCauHoi);
+            ChonDA chd = new ChonDA(2, noiDung);
+            arrDapAnChon.add(viTriCauHoi, chd);
+        } else if (dapAnChon == 3) {
+            arrDapAnChon.remove(viTriCauHoi);
+            ChonDA chd = new ChonDA(3, noiDung);
+            arrDapAnChon.add(viTriCauHoi, chd);
         }
     }
 

@@ -25,6 +25,11 @@ public class KetThucDialog extends Dialog implements android.view.View.OnClickLi
         this.c = a;
         this.timer = timer;
     }
+    public KetThucDialog(LamBaiThiActivity a) {
+        super(a);
+        // TODO Auto-generated constructor stub
+        this.c = a;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
