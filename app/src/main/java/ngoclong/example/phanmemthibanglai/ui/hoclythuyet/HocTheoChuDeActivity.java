@@ -77,7 +77,7 @@ public class HocTheoChuDeActivity extends AppCompatActivity {
 
 
         CauHoiDAO ch = new CauHoiDAO(this);
-        arrCauHoi = ch.getCauHoiTheoNhom(String.valueOf(chuDe)); // Chưa code DAO
+        arrCauHoi = ch.getCauHoiTheoNhom(String.valueOf(chuDe+1)); // Chưa code DAO
         tongSoCau = arrCauHoi.size();
         //Collections.shuffle(arrCauHoi);
 

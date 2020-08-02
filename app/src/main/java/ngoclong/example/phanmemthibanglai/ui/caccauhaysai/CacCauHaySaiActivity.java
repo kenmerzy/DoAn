@@ -52,7 +52,7 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cac_cau_hay_sai);
         cauHoiDAO = new CauHoiDAO(this);
-        arrCauHoi = cauHoiDAO.getCauHoiTheoNhom(String.valueOf(chuDe));
+        arrCauHoi = cauHoiDAO.getCauHoiTheoNhom(String.valueOf(1));
         tongSoCau = arrCauHoi.size();
         //Collections.shuffle(arrCauHoi);
 
@@ -75,7 +75,7 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
 
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Các câu hay sai");
+        getSupportActionBar().setTitle("Câu hỏi hay sai");
 
         listFragment = new ArrayList<CacCauHaySaiFragment>();
         for (int i = 0; i < numPages; i++) {
