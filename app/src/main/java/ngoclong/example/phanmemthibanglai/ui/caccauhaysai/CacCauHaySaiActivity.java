@@ -1,6 +1,5 @@
 package ngoclong.example.phanmemthibanglai.ui.caccauhaysai;
 
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import ngoclong.example.phanmemthibanglai.R;
 import ngoclong.example.phanmemthibanglai.ui.hoclythuyet.ChuDeHocLyThuyet;
@@ -25,13 +23,12 @@ import ngoclong.example.phanmemthibanglai.ui.thisathach.CauHoiDAO;
 import ngoclong.example.phanmemthibanglai.ui.thisathach.ChonDA;
 import ngoclong.example.phanmemthibanglai.ui.thisathach.DapAn;
 import ngoclong.example.phanmemthibanglai.ui.thisathach.DapAnDAO;
-import ngoclong.example.phanmemthibanglai.ui.thisathach.LamBaiThiActivity;
-import ngoclong.example.phanmemthibanglai.ui.thisathach.ScreenSlidePageFragment;
 
 public class CacCauHaySaiActivity extends AppCompatActivity {
 
-    ArrayList<CauHoi> arrCauHaySai;
+    ArrayList<CauHoi> arrCauHoi;
     ArrayList<DapAn> arrDapAnDung;
+
     ArrayList<ArrayList<DapAn>> arrDapAn;
     ArrayList<ChonDA> arrDapAnChon;
     ArrayList<CacCauHaySaiFragment> listFragment;
@@ -42,38 +39,26 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
     MenuItem soCau;
     MenuItem mnuKetThuc;
 
-
     private int numPages;
     private ViewPager mPager;
     private PagerAdapter pagerAdapter;
-    int count;
+
+
+
     int chuDe;
 
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cac_cau_hay_sai);
-        mPager = (ViewPager) findViewById(R.id.pager);
-        pagerAdapter = new CacCauHaySaiAdapter(getSupportFragmentManager());
-        mPager.setAdapter(pagerAdapter);
-
-
-        ViewPager mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setPageTransformer(true, new ZoomOutPageTransformer());
-
-        assert  getSupportActionBar() != null;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
-
         cauHoiDAO = new CauHoiDAO(this);
-        arrCauHaySai = cauHoiDAO.getCauHoiTheoNhom(String.valueOf(0));
-        tongSoCau = arrCauHaySai.size();
-        //Collections.shuffle(arrCauHaySai);
+        arrCauHoi = cauHoiDAO.getCauHoiTheoNhom(String.valueOf(chuDe));
+        tongSoCau = arrCauHoi.size();
+        //Collections.shuffle(arrCauHoi);
 
         DapAnDAO da = new DapAnDAO(this);
-        arrDapAn = da.getAllDapAn(arrCauHaySai);
-        arrDapAnDung = da.getAllDapAnDung(arrCauHaySai);
+        arrDapAn = da.getAllDapAn(arrCauHoi);
+        arrDapAnDung = da.getAllDapAnDung(arrCauHoi);
         numPages = tongSoCau;
 
 
@@ -83,16 +68,30 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
             arrDapAnChon.add(chd);
         }
 
+        mPager = (ViewPager) findViewById(R.id.pagerHocLT);
+        pagerAdapter = new CacCauHaySaiAdapter(getSupportFragmentManager());
+        mPager.setAdapter(pagerAdapter);
+        mPager.setPageTransformer(true, new ZoomOutPageTransformer());
+
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Bộ câu hỏi đa số người thi hay làm sai");
+        getSupportActionBar().setTitle("Các câu hay sai");
 
         listFragment = new ArrayList<CacCauHaySaiFragment>();
         for (int i = 0; i < numPages; i++) {
-            CacCauHaySaiFragment cacCauHaySaiFragment = new CacCauHaySaiFragment(arrCauHaySai.get(i), arrDapAn.get(i), i, numPages, CacCauHaySaiActivity.this, arrDapAnDung.get(i));
+            cacCauHaySaiFragment = new CacCauHaySaiFragment(arrCauHoi.get(i), arrDapAn.get(i), i, numPages, CacCauHaySaiActivity.this, arrDapAnDung.get(i));
             listFragment.add(cacCauHaySaiFragment);
         }
-
+    }
+    public void onBackPressed() {
+        if (mPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+            // Otherwise, select the previous step.
+            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+        }
     }
 
     private class CacCauHaySaiAdapter extends FragmentStatePagerAdapter {
@@ -148,6 +147,9 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
         }
     }
 
+    public void changedViTriCauHoiDangLam(int viTriDangLam) {
+        soCau.setTitle(viTriDangLam + "/" + tongSoCau);
+    }
     public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.85f;
         private static final float MIN_ALPHA = 0.5f;
@@ -180,14 +182,13 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
                         (scaleFactor - MIN_SCALE) /
                                 (1 - MIN_SCALE) * (1 - MIN_ALPHA));
 
-            }
-            else { // (1,+Infinity]
+            } else { // (1,+Infinity]
                 // This page is way off-screen to the right.
                 view.setAlpha(0f);
             }
         }
     }
-    @Override
+
     public boolean onSupportNavigateUp()
     {
         finish();

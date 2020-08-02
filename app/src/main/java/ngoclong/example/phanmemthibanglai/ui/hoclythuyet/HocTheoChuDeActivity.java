@@ -96,8 +96,6 @@ public class HocTheoChuDeActivity extends AppCompatActivity {
         mPager = (ViewPager) findViewById(R.id.pagerHocLT);
         pagerAdapter = new HocTheoChuDeAdapter(getSupportFragmentManager());
         mPager.setAdapter(pagerAdapter);
-
-
         mPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
         assert getSupportActionBar() != null;

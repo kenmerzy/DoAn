@@ -1,6 +1,7 @@
 package ngoclong.example.phanmemthibanglai.ui.caccauhaysai;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,13 +19,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import ngoclong.example.phanmemthibanglai.R;
-import ngoclong.example.phanmemthibanglai.ui.hoclythuyet.HocTheoChuDeActivity;
+
 import ngoclong.example.phanmemthibanglai.ui.thisathach.CauHoi;
 import ngoclong.example.phanmemthibanglai.ui.thisathach.DapAn;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class CacCauHaySaiFragment extends Fragment {
 
     CauHoi c;
@@ -45,10 +44,9 @@ public class CacCauHaySaiFragment extends Fragment {
     DapAn dapAnDung;
     int viTriChon = 0;
 
-
     public CacCauHaySaiFragment() {
+        // Required empty public constructor
     }
-
     @SuppressLint("ValidFragment")
     public CacCauHaySaiFragment(CauHoi c, ArrayList<DapAn> arrDA, int position, int tongSoCau, CacCauHaySaiActivity cacCauHaySaiActivity, DapAn daDung) {
         this.c = c;
@@ -59,7 +57,6 @@ public class CacCauHaySaiFragment extends Fragment {
         dapAnDung = daDung;
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,22 +94,89 @@ public class CacCauHaySaiFragment extends Fragment {
                 if(dapAn1.isChecked()) {
                     viTriChon = 1;
                     dapAnChon = dapAn1.getText().toString();
-                    hocTheoChuDeActivity.updateListDapAnChon(position, 1, dapAn1.getText().toString());
+                    cacCauHaySaiActivity.updateListDapAnChon(position, 1, dapAn1.getText().toString());
                     hienThiCauDung();
                 }
                 else if(dapAn2.isChecked()) {
                     viTriChon = 2;
                     dapAnChon = dapAn2.getText().toString();
-                    hocTheoChuDeActivity.updateListDapAnChon(position, 2, dapAn2.getText().toString());
+                    cacCauHaySaiActivity.updateListDapAnChon(position, 2, dapAn2.getText().toString());
                     hienThiCauDung();
                 }
                 else if(dapAn3.isChecked()) {
                     viTriChon = 3;
                     dapAnChon = dapAn3.getText().toString();
-                    hocTheoChuDeActivity.updateListDapAnChon(position, 3, dapAn3.getText().toString());
+                    cacCauHaySaiActivity.updateListDapAnChon(position, 3, dapAn3.getText().toString());
                     hienThiCauDung();
                 }
             }
         });
+    }
+    public void hienThiCauDung() {
+        if (viTriChon != 0) {
+            checkDapAnVaToMau(viTriChon,dapAnDung.getViTriDung());
+        }
+    }
+
+    private void checkDapAnVaToMau(int viTriChon, int viTriDung)
+    {
+        if(viTriChon == viTriDung) {
+            if (viTriChon == 1) {
+                resetMau();
+                dapAn1.setTextColor(Color.parseColor("#FF21E81B"));
+            }
+            else if (viTriChon == 2)
+            {
+                resetMau();
+                dapAn2.setTextColor(Color.parseColor("#FF21E81B"));
+
+            }
+            else if (viTriChon == 3) {
+                resetMau();
+                dapAn3.setTextColor(Color.parseColor("#FF21E81B"));
+            }
+            hienGiaiThich(true);
+        }
+        else if(viTriChon != viTriDung)
+        {
+            resetMau();
+            toMau(viTriChon,"#FFFF0000");
+            hienGiaiThich(false);
+        }
+        else
+            return;
+    }
+
+    private void resetMau()
+    {
+        dapAn1.setTextColor(Color.parseColor("#000000"));
+        dapAn2.setTextColor(Color.parseColor("#000000"));
+        dapAn3.setTextColor(Color.parseColor("#000000"));
+    }
+    private void toMau(int viTriToMau,String color)
+    {
+        if(viTriToMau == 1)
+            dapAn1.setTextColor(Color.parseColor(color));
+        else if(viTriToMau == 2)
+            dapAn2.setTextColor(Color.parseColor(color));
+        else if (viTriToMau ==3)
+            dapAn3.setTextColor(Color.parseColor(color));
+        else
+            return;
+    }
+
+    private void hienGiaiThich(boolean hien)
+    {
+        if(hien)
+        {
+            tvGiaiThichDapAn.setText(c.getGiaiThich());
+            tvGT.setVisibility(View.VISIBLE);
+            tvGiaiThichDapAn.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tvGT.setVisibility(View.GONE);
+            tvGiaiThichDapAn.setVisibility(View.GONE);
+        }
     }
 }

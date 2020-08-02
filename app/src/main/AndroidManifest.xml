@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ngoclong.example.phanmemthibanglai" >
+    package="ngoclong.example.phanmemthibanglai">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,12 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".ui.hoclythuyet.HocTheoChuDeActivity" >
-        </activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.caccauhaysai.CacCauHaySaiActivity"></activity>
+        <activity android:name=".ui.hoclythuyet.HocTheoChuDeActivity"></activity>
         <activity
             android:name=".ui.WelcomeActivity"
-            android:theme="@style/ThemeNoActionBar" >
+            android:theme="@style/ThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,15 +25,13 @@
         <activity android:name=".ui.thisathach.LamBaiThiActivity" />
         <activity android:name=".ui.tracuuluat.TraCuuLuatActivity" />
         <activity android:name=".ui.bienbao.BienBaoActivity" />
-        <activity android:name=".ui.caccauhaysai.CacCauHaySaiActivity" />
         <activity android:name=".ui.hoclythuyet.HocLyThuyetActivity" />
         <activity android:name=".ui.meothikqcao.MeoThiKQCao" />
         <activity android:name=".ui.thisathach.ThiSatHachActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/ThemeNoActionBar" >
-        </activity>
+            android:theme="@style/ThemeNoActionBar"></activity>
     </application>
 
 </manifest>
