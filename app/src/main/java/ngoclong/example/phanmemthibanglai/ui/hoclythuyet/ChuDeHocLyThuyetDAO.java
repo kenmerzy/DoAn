@@ -26,8 +26,8 @@ public class ChuDeHocLyThuyetDAO {
                 do {
                     int maChuDe = csr.getInt(0);
                     String TenChuDe = csr.getString(1);
-
-                    arr.add(new ChuDeHocLyThuyet(maChuDe,TenChuDe));
+                    String hinhAnh = csr.getString(2);
+                    arr.add(new ChuDeHocLyThuyet(maChuDe,TenChuDe,hinhAnh));
                 } while (csr.moveToNext());
             }
         }

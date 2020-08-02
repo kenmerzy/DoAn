@@ -104,6 +104,8 @@ public class BienBaoHieuLenhFragment extends Fragment {
                 public boolean onQueryTextChange(String s) {
                     if(s.length() != 0)
                         loadBBHLBySearch(s);
+                    else
+                        loadAllBBHL();
                     return true;
                 }
             };

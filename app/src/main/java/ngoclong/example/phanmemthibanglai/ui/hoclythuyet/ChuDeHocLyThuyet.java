@@ -2,11 +2,13 @@ package ngoclong.example.phanmemthibanglai.ui.hoclythuyet;
 
 public class ChuDeHocLyThuyet {
     private int maChuDe;
-    private String TenChuDe;
+    private String tenChuDe;
+    private String hinhAnh;
 
-    public ChuDeHocLyThuyet(int maChuDe, String tenChuDe) {
+    public ChuDeHocLyThuyet(int maChuDe, String tenChuDe, String hinhAnh) {
         this.maChuDe = maChuDe;
-        TenChuDe = tenChuDe;
+        this.tenChuDe = tenChuDe;
+        this.hinhAnh = hinhAnh;
     }
 
     public int getMaChuDe() {
@@ -18,10 +20,18 @@ public class ChuDeHocLyThuyet {
     }
 
     public String getTenChuDe() {
-        return TenChuDe;
+        return tenChuDe;
     }
 
     public void setTenChuDe(String tenChuDe) {
-        TenChuDe = tenChuDe;
+        this.tenChuDe = tenChuDe;
+    }
+
+    public String getHinhAnh() {
+        return hinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        this.hinhAnh = hinhAnh;
     }
 }

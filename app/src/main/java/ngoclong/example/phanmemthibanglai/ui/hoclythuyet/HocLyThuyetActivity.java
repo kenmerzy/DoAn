@@ -61,7 +61,7 @@ public class HocLyThuyetActivity extends AppCompatActivity {
         cauHoiDAO = new CauHoiDAO(HocLyThuyetActivity.this);
         for(int i=0 ; i< count; i++) {
             arrCauHoi = new ArrayList<CauHoi>();
-            arrCauHoi = cauHoiDAO.getCauHoiTheoNhom(String.valueOf(i));
+            arrCauHoi = cauHoiDAO.getCauHoiTheoNhom(String.valueOf(i+1));
             arrayListsCH.add(arrCauHoi);
 
         }
@@ -115,8 +115,7 @@ public class HocLyThuyetActivity extends AppCompatActivity {
             title.setText(arrChuDe.get(i).getTenChuDe());
             description.setText("Gồm "+ arrayListsCH.get(i).size() +" câu hỏi");
             title.setText(arrChuDe.get(i).getTenChuDe());
-            //String url = "file:///android_asset/images/" + icons[i];
-            String url = "file:///android_asset/images/l8.jpg";
+            String url = "file:///android_asset/images/"+arrChuDe.get(i).getHinhAnh();
             Picasso.with(HocLyThuyetActivity.this).load(url).into(imv);
             return view1;
         }

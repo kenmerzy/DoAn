@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import ngoclong.example.phanmemthibanglai.R;
 
@@ -88,6 +89,27 @@ public class BienBaoCamFragment extends Fragment {
             listView.setVisibility(View.GONE);
     }//
 
+    private char[] charA = { 'à', 'á', 'ạ', 'ả', 'ã',// 0-&gt;16
+            'â', 'ầ', 'ấ', 'ậ', 'ẩ', 'ẫ', 'ă', 'ằ', 'ắ', 'ặ', 'ẳ', 'ẵ' };// a,// ă,// â
+    private char[] charE = { 'ê', 'ề', 'ế', 'ệ', 'ể', 'ễ',// 17-&gt;27
+            'è', 'é', 'ẹ', 'ẻ', 'ẽ' };// e
+    private char[] charI = { 'ì', 'í', 'ị', 'ỉ', 'ĩ' };// i 28-&gt;32
+    private char[] charO = { 'ò', 'ó', 'ọ', 'ỏ', 'õ',// o 33-&gt;49
+            'ô', 'ồ', 'ố', 'ộ', 'ổ', 'ỗ',// ô
+            'ơ', 'ờ', 'ớ', 'ợ', 'ở', 'ỡ' };// ơ
+    private char[] charU = { 'ù', 'ú', 'ụ', 'ủ', 'ũ',// u 50-&gt;60
+            'ư', 'ừ', 'ứ', 'ự', 'ử', 'ữ' };// ư
+    private char[] charY = { 'ỳ', 'ý', 'ỵ', 'ỷ', 'ỹ' };// y 61-&gt;65
+    private char[] charD = { 'đ', ' ' }; // 66-67
+
+    String charact = String.valueOf(charA, 0, charA.length)
+            + String.valueOf(charE, 0, charE.length)
+            + String.valueOf(charI, 0, charI.length)
+            + String.valueOf(charO, 0, charO.length)
+            + String.valueOf(charU, 0, charU.length)
+            + String.valueOf(charY, 0, charY.length)
+            + String.valueOf(charD, 0, charD.length);
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_bien_bao, menu);
@@ -101,7 +123,8 @@ public class BienBaoCamFragment extends Fragment {
             queryTextListener = new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String s) {
-                    Log.i("Tìm kiếm ", s);
+
+                    loadBBCTheoSearch(s);
                     return true;
                 }
 
@@ -109,11 +132,15 @@ public class BienBaoCamFragment extends Fragment {
                 public boolean onQueryTextChange(String s) {
                     if(s.length() != 0)
                         loadBBCTheoSearch(s);
+                    else
+                        loadAllBBC();
+
                     return true;
                 }
             };
             searchView.setOnQueryTextListener(queryTextListener);
         }
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 

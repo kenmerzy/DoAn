@@ -107,6 +107,8 @@ public class BienBaoNguyHiemFragment extends Fragment {
                 public boolean onQueryTextChange(String s) {
                     if(s.length() != 0)
                         loadBBNHBySearch(s);
+                    else
+                        loadAllBBNH();
                     return true;
                 }
             };

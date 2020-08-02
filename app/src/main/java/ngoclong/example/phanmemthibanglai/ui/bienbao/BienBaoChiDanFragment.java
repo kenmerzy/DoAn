@@ -107,6 +107,8 @@ public class BienBaoChiDanFragment extends Fragment {
                 public boolean onQueryTextChange(String s) {
                     if(s.length() != 0)
                         loadBBCDBySearch(s);
+                    else
+                        loadAllBBCD();
                     return true;
                 }
             };
