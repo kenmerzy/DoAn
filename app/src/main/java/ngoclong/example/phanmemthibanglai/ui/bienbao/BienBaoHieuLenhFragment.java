@@ -70,6 +70,7 @@ public class BienBaoHieuLenhFragment extends Fragment {
         arrBienBaoHieuLenh = bb.getAllBienBaoHieuLenh();
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
+        listView.setVisibility(View.VISIBLE);
     }
 
     private void loadBBHLBySearch(String search) {

@@ -73,6 +73,7 @@ public class BienBaoNguyHiemFragment extends Fragment {
         arrBienBaoNguyHiem = bb.getAllBienBaoNguyHiem();
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
+        listView.setVisibility(View.VISIBLE);
     }
 
     private void loadBBNHBySearch(String search) {

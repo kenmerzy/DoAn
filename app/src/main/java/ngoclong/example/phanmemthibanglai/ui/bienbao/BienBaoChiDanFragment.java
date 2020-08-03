@@ -72,6 +72,7 @@ public class BienBaoChiDanFragment extends Fragment {
         arrBienBaoChiDan = bb.getAllBienBaoChiDan();
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
+        listView.setVisibility(View.VISIBLE);
     }
 
     private void loadBBCDBySearch(String search) {

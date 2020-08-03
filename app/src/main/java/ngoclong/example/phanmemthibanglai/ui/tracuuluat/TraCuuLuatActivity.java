@@ -55,6 +55,7 @@ public class TraCuuLuatActivity extends AppCompatActivity {
         arrLuatXeMay = tcl.getAllLuatXeMay();
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
+        listView.setVisibility(View.VISIBLE);
     }//
     private void loadTCLTheoSearch(String search) {
         arrLuatXeMay = tcl.getAllLuatXeMayBySearch(search);

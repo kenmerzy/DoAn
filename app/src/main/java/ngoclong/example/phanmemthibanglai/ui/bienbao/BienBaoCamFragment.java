@@ -76,6 +76,7 @@ public class BienBaoCamFragment extends Fragment {
         arrBienBaoCam = bb.getAllBienBaoCam();
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
+        listView.setVisibility(View.VISIBLE);
     }//
 
     private void loadBBCTheoSearch(String search) {
@@ -106,8 +107,9 @@ public class BienBaoCamFragment extends Fragment {
                 public boolean onQueryTextSubmit(String s) {
                     if(s.length() != 0)
                         loadBBCTheoSearch(s);
-                    else
+                    else {
                         loadAllBBC();
+                    }
                     return true;
                 }
 
