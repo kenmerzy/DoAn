@@ -99,7 +99,10 @@ public class BienBaoChiDanFragment extends Fragment {
             queryTextListener = new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String s) {
-                    Log.i("Tìm kiếm ", s);
+                    if(s.length() != 0)
+                        loadBBCDBySearch(s);
+                    else
+                        loadAllBBCD();
                     return true;
                 }
 

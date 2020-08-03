@@ -93,8 +93,6 @@ public class LamBaiThiActivity extends AppCompatActivity {
         mPager = (ViewPager) findViewById(R.id.pager);
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(pagerAdapter);
-
-
         mPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
         assert getSupportActionBar() != null;
@@ -104,7 +102,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
         listFragment = new ArrayList<ScreenSlidePageFragment>();
         for (int i = 0; i < NUM_PAGES; i++) {
             ssf = new ScreenSlidePageFragment(arrCauHoi.get(i), arrDapAn.get(i), i, NUM_PAGES, LamBaiThiActivity.this, arrDapAnDung.get(i));
-            listFragment.add(ssf);
+            listFragment.add(i,ssf);
         }
     }
 
@@ -254,8 +252,9 @@ public class LamBaiThiActivity extends AppCompatActivity {
         tvDiem.setText("Điểm: " + String.valueOf(ketQua) + "/" + NUM_PAGES);
         mnuKetThuc.setVisible(false);
         mnuDiem.setVisible(true);
-        int p = mPager.getCurrentItem();
+
         mPager.setAdapter(pagerAdapter);
+        mPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
 
     }

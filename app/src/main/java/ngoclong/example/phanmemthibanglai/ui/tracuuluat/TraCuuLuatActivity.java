@@ -74,7 +74,10 @@ public class TraCuuLuatActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Toast.makeText(TraCuuLuatActivity.this, s ,Toast.LENGTH_SHORT).show();
+                if(s.length() != 0)
+                    loadTCLTheoSearch(s);
+                else
+                    loadAllTCL();
                 return false;
             }
 
@@ -82,6 +85,8 @@ public class TraCuuLuatActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 if(s.length() != 0)
                     loadTCLTheoSearch(s);
+                else
+                    loadAllTCL();
                 return true;
             }
         });
