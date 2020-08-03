@@ -35,6 +35,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
     TextView tienTrinhHoanThanh;
     TextView tvDiem;
     public CountDownTimer timer;
+    public static boolean daThiXong;
     ArrayList<CauHoi> arrCauHoi;
     ArrayList<DapAn> arrDapAnDung;
     ArrayList<ArrayList<DapAn>> arrDapAn;
@@ -43,7 +44,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
     ScreenSlidePageFragment ssf;
     int tongSoCau;
     int ketQua;
-    boolean daThiXong;
+
     private boolean ketThuc;
     MenuItem mnuKetThuc;
     MenuItem mnuDiem;
@@ -63,10 +64,11 @@ public class LamBaiThiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lam_bai_thi);
 
+        daThiXong = false;
+
         Bundle b = getIntent().getExtras();
         if (b != null)
             boDe = b.getInt("boDe");
-        daThiXong = false;
 
 
         ch = new CauHoiDAO(LamBaiThiActivity.this);
@@ -247,6 +249,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
         for (int i = 0; i < NUM_PAGES; i++) {
             listFragment.get(i).setThiXong(true);
         }
+        daThiXong = true;
         ketQua = chamDiem();
         tvDiem.setText("Điểm: " + String.valueOf(ketQua) + "/" + NUM_PAGES);
         mnuKetThuc.setVisible(false);

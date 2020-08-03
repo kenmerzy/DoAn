@@ -1,10 +1,13 @@
 package ngoclong.example.phanmemthibanglai.ui.tracuuluat;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -20,13 +23,13 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import ngoclong.example.phanmemthibanglai.R;
-import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBaoActivity;
-import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBaoAdapter;
 
 public class TraCuuLuatActivity extends AppCompatActivity {
 
     private ArrayList<Luat> arrLuatXeMay;
-
+    private SearchView searchView;
+    private SearchView.OnQueryTextListener queryTextListener;
+    private TraCuuLuatDAO tcl;
 
     TextView tvNoiDung;
     TextView tvTienPhat;
@@ -41,17 +44,28 @@ public class TraCuuLuatActivity extends AppCompatActivity {
         assert  getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Luật xe máy cơ bản");
-
-        TraCuuLuatDAO tcl = new TraCuuLuatDAO(TraCuuLuatActivity.this);
         arrLuatXeMay = new ArrayList<Luat>();
-        arrLuatXeMay = tcl.getAllLuatXeMay();
-
+        tcl = new TraCuuLuatDAO(getBaseContext());
         count = tcl.getSoLuatxeMay();
         listView = findViewById(R.id.listV_LuatXeMay);
-        CustomAdapter customAdapter = new CustomAdapter();
-        listView.setAdapter(customAdapter);
+        loadAllTCL();
     }
 
+    private void loadAllTCL() {
+        arrLuatXeMay = tcl.getAllLuatXeMay();
+        CustomAdapter customAdapter = new CustomAdapter();
+        listView.setAdapter(customAdapter);
+    }//
+    private void loadTCLTheoSearch(String search) {
+        arrLuatXeMay = tcl.getAllLuatXeMayBySearch(search);
+        if(arrLuatXeMay.size() > 0) {
+            CustomAdapter customAdapter = new CustomAdapter();
+            listView.setAdapter(customAdapter);
+            listView.setVisibility(View.VISIBLE);
+        }
+        else
+            listView.setVisibility(View.GONE);
+    }//
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -66,17 +80,19 @@ public class TraCuuLuatActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                Log.d("Tra Cuu Luat", s);
-                return false;
+                if(s.length() != 0)
+                    loadTCLTheoSearch(s);
+                return true;
             }
         });
         return super.onCreateOptionsMenu(menu);
     }
+
     private class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return count;
+            return arrLuatXeMay.size();
         }
 
         @Override

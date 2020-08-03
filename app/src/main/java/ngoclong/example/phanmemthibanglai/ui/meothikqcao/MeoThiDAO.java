@@ -1,69 +1,73 @@
-package ngoclong.example.phanmemthibanglai.ui.tracuuluat;
+package ngoclong.example.phanmemthibanglai.ui.meothikqcao;
 
 import android.content.Context;
 import android.database.Cursor;
 
 import java.util.ArrayList;
 
-
-import ngoclong.example.phanmemthibanglai.ui.bienbao.BienBao;
 import ngoclong.example.phanmemthibanglai.ui.thisathach.DatabaseAccess;
 
-public class TraCuuLuatDAO {
+public class MeoThiDAO {
     Cursor csr = null;
     DatabaseAccess databaseAccess;
-    public TraCuuLuatDAO(Context context){
+
+    public MeoThiDAO(Context context) {
         databaseAccess = DatabaseAccess.getInstance(context);
     }
 
-    public ArrayList<Luat> getAllLuatXeMay(){
+    public ArrayList<MeoThi> getAllMeoLyThuyet() {
         databaseAccess.open();
-        ArrayList<Luat> arr = new ArrayList<>();
+        ArrayList<MeoThi> arr = new ArrayList<>();
 
-        String sql = "select * from TraCuuLuatXeMay";
+        String sql = "select * from MeoLyThuyet";
         csr = databaseAccess.getDb().rawQuery(sql, null);
         if (csr != null) {
             if (csr.moveToFirst()) {
                 do {
-
                     String noiDung = csr.getString(0);
-                    String mucPhat = csr.getString(1);
-                    String hinh = csr.getString(2);
-                    arr.add(new Luat(noiDung, mucPhat, hinh));
+                    arr.add(new MeoThi(noiDung));
                 } while (csr.moveToNext());
             }
         }
         databaseAccess.close();
         return arr;
     }
-    public int getSoLuatxeMay()
-    {
+
+    public int getMeoLyThuyet() {
         databaseAccess.open();
-        String countQuery = "SELECT  * FROM TraCuuLuatXeMay" ;
+        String countQuery = "SELECT  * FROM MeoLyThuyet";
         Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
         databaseAccess.close();
         return count;
     }
-    public ArrayList<Luat> getAllLuatXeMayBySearch(String search){
-        databaseAccess.open();
-        ArrayList<Luat> arr = new ArrayList<>();
 
-        String sql = "select * from TraCuuLuatXeMay where NoiDung like '%" + search + "%'";
+    public ArrayList<MeoThi> getAllMeoThucHanh() {
+        databaseAccess.open();
+        ArrayList<MeoThi> arr = new ArrayList<>();
+
+        String sql = "select * from MeoThucHanht";
         csr = databaseAccess.getDb().rawQuery(sql, null);
         if (csr != null) {
             if (csr.moveToFirst()) {
                 do {
-
                     String noiDung = csr.getString(0);
-                    String mucPhat = csr.getString(1);
-                    String hinh = csr.getString(2);
-                    arr.add(new Luat(noiDung, mucPhat, hinh));
+                    arr.add(new MeoThi(noiDung));
                 } while (csr.moveToNext());
             }
         }
         databaseAccess.close();
         return arr;
+    }
+
+    public int getMeoThucHanh() {
+        databaseAccess.open();
+        String countQuery = "SELECT  * FROM MeoThucHanh";
+        Cursor cursor = databaseAccess.getDb().rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        databaseAccess.close();
+        return count;
     }
 }

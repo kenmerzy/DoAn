@@ -47,7 +47,7 @@ public class ThiSatHachActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ThiSatHachActivity.this, LamBaiThiActivity.class);
-                startActivity(intent);
+
                 Bundle b = new Bundle();
                 b.putInt("boDe", 0); // Thi ngẫu nhiên
                 intent.putExtras(b);
