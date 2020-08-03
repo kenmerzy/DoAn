@@ -47,7 +47,7 @@ public class MeoThiDAO {
         databaseAccess.open();
         ArrayList<MeoThi> arr = new ArrayList<>();
 
-        String sql = "select * from MeoThucHanht";
+        String sql = "select * from MeoThucHanh";
         csr = databaseAccess.getDb().rawQuery(sql, null);
         if (csr != null) {
             if (csr.moveToFirst()) {
