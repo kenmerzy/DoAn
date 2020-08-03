@@ -125,16 +125,11 @@ public class ScreenSlidePageFragment extends Fragment {
 
         if (daThiXong) {
             if (!dapAnChon.equals("Empty...")) {
-                if (dapAnChon.equals(dapAnDung.getNoiDung())) {
-                    toMau(dapAnDung.getViTriDung(), "#FF21E81B");
-                    danhDau(viTriChon);
-                } else {
-                    toMau(viTriChon, "#FFFF0000");
-                    toMau(dapAnDung.getViTriDung(), "#FF21E81B");
-                    danhDau(viTriChon);
-                }
+               checkDapAnVaToMau(viTriChon,dapAnDung.getViTriDung());
+               danhDau(viTriChon);
             } else {
                 toMau(dapAnDung.getViTriDung(), "#FF21E81B");
+                hienGiaiThich();
             }
 
 
@@ -168,6 +163,43 @@ public class ScreenSlidePageFragment extends Fragment {
         else
             return;
     }
+    private void checkDapAnVaToMau(int viTriChon, int viTriDung)
+    {
+        if(viTriChon == viTriDung) {
+            if (viTriDung == 1) {
+                resetMau();
+                dapAn1.setTextColor(Color.parseColor("#FF21E81B"));
+            }
+            else if (viTriDung == 2)
+            {
+                resetMau();
+                dapAn2.setTextColor(Color.parseColor("#FF21E81B"));
+
+            }
+            else if (viTriDung == 3) {
+                resetMau();
+                dapAn3.setTextColor(Color.parseColor("#FF21E81B"));
+            }
+            hienGiaiThich();
+        }
+        else if(viTriChon != viTriDung)
+        {
+            resetMau();
+            toMau(viTriChon,"#FFFF0000");
+            toMau(viTriDung,"#FF21E81B");
+            hienGiaiThich();
+        }
+        else
+            return;
+    }
+
+    private void resetMau()
+    {
+        dapAn1.setTextColor(Color.parseColor("#000000"));
+        dapAn2.setTextColor(Color.parseColor("#000000"));
+        dapAn3.setTextColor(Color.parseColor("#000000"));
+    }
+
     private void hienGiaiThich()
     {
         tvGiaiThichDapAn.setText(c.getGiaiThich());

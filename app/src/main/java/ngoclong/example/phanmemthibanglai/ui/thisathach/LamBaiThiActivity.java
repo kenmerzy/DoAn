@@ -49,6 +49,8 @@ public class LamBaiThiActivity extends AppCompatActivity {
     MenuItem mnuDiem;
     MenuItem soCau;
     MenuItem timerItem;
+    CauHoiDAO ch;
+    int boDe;
 
     private static final int NUM_PAGES = 20;
 
@@ -61,19 +63,25 @@ public class LamBaiThiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lam_bai_thi);
 
+        Bundle b = getIntent().getExtras();
+        if (b != null)
+            boDe = b.getInt("boDe");
         daThiXong = false;
 
 
-        CauHoiDAO ch = new CauHoiDAO(this);
-        arrCauHoi = ch.getAllCauHoi();
-        tongSoCau = arrCauHoi.size();
-        //Collections.shuffle(arrCauHoi);
-        DapAnDAO da = new DapAnDAO(this);
+        ch = new CauHoiDAO(LamBaiThiActivity.this);
+        if(boDe == 0) {
+            arrCauHoi = ch.getAllCauHoi();
+//            tongSoCau = arrCauHoi.size();
+            Collections.shuffle(arrCauHoi);
+        }
+        else
+        {
+            arrCauHoi = ch.getCauHoiTheoBoDe(String.valueOf(boDe));
+        }
+        DapAnDAO da = new DapAnDAO(LamBaiThiActivity.this);
         arrDapAn = da.getAllDapAn(arrCauHoi);
         arrDapAnDung = da.getAllDapAnDung(arrCauHoi);
-
-
-
         arrDapAnChon = new ArrayList<ChonDA>();
         for (int i = 0; i < NUM_PAGES; i++) {
             ChonDA chd = new ChonDA(0, "Empty...");
@@ -229,7 +237,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
     public int chamDiem() {
         int diem = 0;
         for (int i = 0; i < NUM_PAGES; i++) {
-            if (arrDapAnDung.get(i).getNoiDung().equals(arrDapAnChon.get(i).getNoiDung()))
+            if (arrDapAnDung.get(i).getViTriDung() == arrDapAnChon.get(i).getViTri())
                 diem++;
         }
         return diem;

@@ -20,7 +20,7 @@ public class DapAnDAO {
         String sql;
         for (int i = 0; i < arrCauHoi.size() ; i++) {
             arrSmall = new ArrayList<DapAn>();
-            sql = "select * from DapAn where maCauHoi = " + arrCauHoi.get(i).getMaCauHoi();
+            sql = "select * from DapAn where MaCauHoi = " + arrCauHoi.get(i).getMaCauHoi();
             csr = databaseAccess.getDb().rawQuery(sql, null);
             if (csr != null) {
                 if (csr.moveToFirst()) {
@@ -45,7 +45,7 @@ public class DapAnDAO {
         ArrayList<DapAn> arr = new ArrayList<DapAn>();
         String sql;
         for (int i = 0; i < arrCauHoi.size() ; i++) {
-            sql = "select * from DapAn where dungSai = 1 and maCauHoi =" + arrCauHoi.get(i).getMaCauHoi();
+            sql = "select * from DapAn where DungSai = 1 and  MaCauHoi = " + arrCauHoi.get(i).getMaCauHoi();
             csr = databaseAccess.getDb().rawQuery(sql, null);
             if (csr != null) {
                 if (csr.moveToFirst()) {

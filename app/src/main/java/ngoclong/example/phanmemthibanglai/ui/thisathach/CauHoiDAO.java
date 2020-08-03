@@ -33,6 +33,26 @@ public class CauHoiDAO {
         return arr;
     }
 
+    public ArrayList<CauHoi> getCauHoiTheoBoDe(String maDe){
+        databaseAccess.open();
+        ArrayList<CauHoi> arr = new ArrayList<>();
+        String sql = "select * from CauHoi where De = " + maDe;
+        csr = databaseAccess.getDb().rawQuery(sql, null);
+        if (csr != null) {
+            if (csr.moveToFirst()) {
+                do {
+                    int maCauHoi = csr.getInt(0);
+                    String noiDung = csr.getString(1);
+                    String giaiThich = csr.getString(2);
+                    String nhomCauHoi = csr.getString(3);
+                    String hinhAnh = csr.getString(4);
+                    arr.add(new CauHoi(maCauHoi,noiDung,giaiThich,nhomCauHoi,hinhAnh));
+                } while (csr.moveToNext());
+            }
+        }
+        databaseAccess.close();
+        return arr;
+    }
 
     public ArrayList<CauHoi> getCauHoiTheoNhom(String maNhom){
         databaseAccess.open();

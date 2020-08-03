@@ -36,13 +36,21 @@ public class ThiSatHachActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
             {
                 Intent intent = new Intent(ThiSatHachActivity.this, LamBaiThiActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("boDe", position + 1);
+                intent.putExtras(b);
                 startActivity(intent);
+
             }
         });
         thiNgauNhien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ThiSatHachActivity.this, LamBaiThiActivity.class);
+                startActivity(intent);
+                Bundle b = new Bundle();
+                b.putInt("boDe", 0); // Thi ngẫu nhiên
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });
