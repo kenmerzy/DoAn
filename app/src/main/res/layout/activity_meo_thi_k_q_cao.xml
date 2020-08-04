@@ -19,7 +19,7 @@
         app:tabGravity="fill"
         android:background="@color/colorPrimaryDark"
         app:tabTextColor="#FFFFFF"
-        app:tabSelectedTextColor="#E34350"
+        app:tabSelectedTextColor="#FF0015"
         tools:ignore="ExtraText">
 
     </android.support.design.widget.TabLayout>

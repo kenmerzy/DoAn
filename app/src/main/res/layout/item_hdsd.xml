@@ -6,8 +6,10 @@
         android:id="@+id/tvHDSD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:padding="12dp"
+        android:textSize="19dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+
         android:textColor="#000000"
         >
     </TextView>

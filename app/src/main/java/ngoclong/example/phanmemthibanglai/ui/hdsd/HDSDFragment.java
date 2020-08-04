@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ngoclong.example.phanmemthibanglai.R;
 
@@ -45,7 +46,7 @@ public class HDSDFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        listView = view.findViewById(R.id.listLT);
+        listView = view.findViewById(R.id.LV_HDSD);
         loadAllHDSD();
     }
     private void loadAllHDSD() {
@@ -74,7 +75,7 @@ public class HDSDFragment extends Fragment {
         public View getView(int i, View convertView, ViewGroup parent) {
             View view1 = getLayoutInflater().inflate(R.layout.item_hdsd, null);
             tviewHDSD = view1.findViewById(R.id.tvHDSD);
-            tviewHDSD.setText((i + 1) +". "+ arrHDSD.get(i).getNoidung());
+            tviewHDSD.setText( arrHDSD.get(i).getNoidung());
             return view1;
         }
     }

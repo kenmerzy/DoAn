@@ -105,7 +105,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
         listFragment = new ArrayList<ScreenSlidePageFragment>();
         for (int i = 0; i < NUM_PAGES; i++) {
             ssf = new ScreenSlidePageFragment(arrCauHoi.get(i), arrDapAn.get(i), i, NUM_PAGES, LamBaiThiActivity.this, arrDapAnDung.get(i));
-            listFragment.add(i,ssf);
+            listFragment.add(ssf);
         }
     }
 
@@ -175,7 +175,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         tvDiem.setTypeface(null, Typeface.BOLD);
 
-        tvDiem.setTextColor(Color.WHITE);
+        tvDiem.setTextColor(Color.parseColor("#FFFF0000"));
 
         tvDiem.setTextSize(17);
 
