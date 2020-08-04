@@ -80,7 +80,7 @@ public class MeoThucHanhFragment extends Fragment {
             View view1 = getLayoutInflater().inflate(R.layout.item_meothi, null);
             tvNoiDung = view1.findViewById(R.id.tvMLT);
 
-            tvNoiDung.setText(arrMeoThi.get(i).getNoiDung());
+            tvNoiDung.setText((i + 1) +". "+ arrMeoThi.get(i).getNoiDung());
             return view1;
         }
     }

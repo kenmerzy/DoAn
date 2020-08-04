@@ -163,7 +163,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         tienTrinhHoanThanh = (TextView) MenuItemCompat.getActionView(mnuDiem);
 
-        tvDiem.setPadding(10, 0, 20, 0); //Or something like that...
+        tvDiem.setPadding(10, 0, 40, 0); //Or something like that...
 
         tvDiem.setTypeface(null, Typeface.BOLD);
 

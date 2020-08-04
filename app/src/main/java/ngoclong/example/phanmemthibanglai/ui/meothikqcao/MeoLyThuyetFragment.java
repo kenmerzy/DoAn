@@ -80,8 +80,7 @@ public class MeoLyThuyetFragment extends Fragment {
         public View getView(int i, View convertView, ViewGroup parent) {
             View view1 = getLayoutInflater().inflate(R.layout.item_meothi, null);
             tvNoiDung = view1.findViewById(R.id.tvMLT);
-
-            tvNoiDung.setText(arrMeoThi.get(i).getNoiDung());
+            tvNoiDung.setText((i + 1) +". "+ arrMeoThi.get(i).getNoiDung());
             return view1;
         }
     }

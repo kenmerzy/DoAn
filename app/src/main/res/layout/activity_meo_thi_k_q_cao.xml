@@ -17,7 +17,9 @@
         app:tabIndicatorColor="@color/cardview_dark_background"
         app:tabMode="fixed"
         app:tabGravity="fill"
-        app:tabSelectedTextColor="@color/design_default_color_primary_dark"
+        android:background="@color/colorPrimaryDark"
+        app:tabTextColor="#FFFFFF"
+        app:tabSelectedTextColor="#E34350"
         tools:ignore="ExtraText">
 
     </android.support.design.widget.TabLayout>
