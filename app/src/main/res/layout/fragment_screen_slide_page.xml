@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:textSize="18dp"
+                android:textSize="19dp"
                 android:text="TP.HCM" />
 
             <RadioButton
@@ -41,14 +41,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:textSize="18dp"
+                android:textSize="19dp"
                 android:text="Vĩnh Long" />
             <RadioButton
                 android:id="@+id/rdBtnDapAn3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                android:textSize="18dp"
+                android:textSize="19dp"
                 android:text="Bến Tre" />
 
         </RadioGroup>

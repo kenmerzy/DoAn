@@ -132,7 +132,6 @@ public class ScreenSlidePageFragment extends Fragment {
                 hienGiaiThich();
             }
 
-
             setupRadioButton(false);
             hienGiaiThich();
         }
