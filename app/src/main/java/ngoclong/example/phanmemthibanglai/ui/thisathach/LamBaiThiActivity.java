@@ -66,20 +66,25 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         daThiXong = false;
 
-        Bundle b = getIntent().getExtras();
-        if (b != null)
-            boDe = b.getInt("boDe");
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            boDe = b.getInt("boDe");
+        }
 
         ch = new CauHoiDAO(LamBaiThiActivity.this);
         if(boDe == 0) {
             arrCauHoi = ch.getAllCauHoi();
 //            tongSoCau = arrCauHoi.size();
             Collections.shuffle(arrCauHoi);
+            getSupportActionBar().setTitle("Thi ngẫu nhiên");
         }
         else
         {
             arrCauHoi = ch.getCauHoiTheoBoDe(String.valueOf(boDe));
+            getSupportActionBar().setTitle("Bộ đề " +boDe );
         }
         DapAnDAO da = new DapAnDAO(LamBaiThiActivity.this);
         arrDapAn = da.getAllDapAn(arrCauHoi);
@@ -95,9 +100,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
         mPager.setAdapter(pagerAdapter);
         mPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+
 
         listFragment = new ArrayList<ScreenSlidePageFragment>();
         for (int i = 0; i < NUM_PAGES; i++) {
@@ -106,16 +109,20 @@ public class LamBaiThiActivity extends AppCompatActivity {
         }
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        if (mPager.getCurrentItem() == 0) {
+//            // If the user is currently looking at the first step, allow the system to handle the
+//            // Back button. This calls finish() on this activity and pops the back stack.
+//            super.onBackPressed();
+//        } else {
+//            // Otherwise, select the previous step.
+//            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+//        }
+//    }
     @Override
     public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
             super.onBackPressed();
-        } else {
-            // Otherwise, select the previous step.
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
     }
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
@@ -134,6 +141,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
             return NUM_PAGES;
         }
     }
+
 
 
     @Override
@@ -173,7 +181,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         timerText = (TextView) MenuItemCompat.getActionView(timerItem);
 
-        timerText.setPadding(10, 0, 20, 0); //Or something like that...
+        timerText.setPadding(10, 0, 40, 0); //Or something like that...
 
         timerText.setTypeface(null, Typeface.BOLD);
 
@@ -181,7 +189,7 @@ public class LamBaiThiActivity extends AppCompatActivity {
 
         timerText.setTextSize(17);
 
-        startTimer(150000, 1000); //One tick every second for 300 seconds
+        startTimer(140000, 1000);
 
 
         return super.onCreateOptionsMenu(menu);
@@ -253,8 +261,11 @@ public class LamBaiThiActivity extends AppCompatActivity {
         mnuKetThuc.setVisible(false);
         mnuDiem.setVisible(true);
 
-        mPager.setAdapter(pagerAdapter);
-        mPager.setPageTransformer(true, new ZoomOutPageTransformer());
+
+        if(mPager.getCurrentItem()>2)
+            mPager.setCurrentItem(0);
+        else
+            mPager.setCurrentItem(mPager.getCurrentItem()+2);
 
 
     }

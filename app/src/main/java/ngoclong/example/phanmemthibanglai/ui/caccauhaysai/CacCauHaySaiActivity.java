@@ -83,15 +83,19 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
             listFragment.add(cacCauHaySaiFragment);
         }
     }
+//    public void onBackPressed() {
+//        if (mPager.getCurrentItem() == 0) {
+//            // If the user is currently looking at the first step, allow the system to handle the
+//            // Back button. This calls finish() on this activity and pops the back stack.
+//            super.onBackPressed();
+//        } else {
+//            // Otherwise, select the previous step.
+//            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+//        }
+//    }
+    @Override
     public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed();
-        } else {
-            // Otherwise, select the previous step.
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
+        super.onBackPressed();
     }
 
     private class CacCauHaySaiAdapter extends FragmentStatePagerAdapter {
@@ -147,9 +151,7 @@ public class CacCauHaySaiActivity extends AppCompatActivity {
         }
     }
 
-    public void changedViTriCauHoiDangLam(int viTriDangLam) {
-        soCau.setTitle(viTriDangLam + "/" + tongSoCau);
-    }
+
     public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.85f;
         private static final float MIN_ALPHA = 0.5f;
